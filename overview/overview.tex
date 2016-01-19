@@ -1,0 +1,567 @@
+%\documentclass[handout]{beamer}
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[swedish,english]{babel}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{subfig}
+\usepackage{multicol}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{booktabs}
+\usepackage[binary,squaren]{SIunits}
+\usepackage{listings}
+
+\setbeamertemplate{bibliography item}[text]
+\usepackage[natbib,style=alphabetic,maxbibnames=99]{biblatex}
+\addbibresource{overview.bib}
+
+\mode<presentation>{%
+  \usetheme{Frankfurt}
+  \setbeamercovered{transparent}
+  \usecolortheme{seagull}
+}
+\setbeamertemplate{footline}{\insertframenumber}
+
+\title[Authentication]{%
+  Identification and Authentication
+}
+\author{Daniel Bosk\footnote{%
+  This work is licensed under the Creative Commons Attribution-ShareAlike 3.0 
+  Unported license.
+	To view a copy of this license, visit 
+	\url{http://creativecommons.org/licenses/by-sa/3.0/}.
+}}
+\institute[MIUN ICS]{%
+  Department of Information and Communication Systems (ICS),\\
+  Mid Sweden University, Sundsvall.
+}
+\date{\today}
+
+%\pgfdeclareimage[height=0.65cm]{university-logo}{MU_logotyp_int_CMYK.pdf}
+%\logo{\pgfuseimage{university-logo}}
+
+\AtBeginSection[]{%
+  \begin{frame}<beamer>{Overview}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+%\AtBeginSubsection[]{%
+%  \begin{frame}<beamer>
+%    \begin{center}
+%      \insertsectionhead
+%    \end{center}
+%  \end{frame}
+%}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage{}
+\end{frame}
+
+\begin{frame}{Overview}
+  \tableofcontents
+  % You might wish to add the option [pausesections]
+\end{frame}
+
+
+% Since this a solution template for a generic talk, very little can
+% be said about how it should be structured. However, the talk length
+% of between 15min and 45min and the theme suggest that you stick to
+% the following rules:  
+
+% - Exactly two or three sections (other than the summary).
+% - At *most* three subsections per section.
+% - Talk about 30s to 2min per frame. So there should be between about
+%   15 and 30 frames, all told.
+
+
+\section[Bootstrapping]{Bootstrapping Authentication}
+
+\subsection{What Is Authentication?}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{itemize}
+    \item Authentication is the process of verifying the identity claimed by 
+      some system entity.
+
+    \item I.e.\ first you enter your username to \emph{identify} yourself.
+
+    \item Then you enter your password to \emph{authenticate} that you are 
+      truly you.
+
+  \end{itemize}
+\end{frame}
+
+\subsection{Types of Identification and Authentication}
+
+\begin{frame}{\insertsubsectionhead}{Identification}
+  \begin{itemize}
+    \item Username or User ID
+    \item The person who opened the account
+    \item Personal Identification Number (Swe.\ personnummer, Eng.\ Social 
+      Security Number)
+    \item Fingerprint
+    \item Iris scan
+    \item DNA sequence \dots
+    \item Cryptographic key or certificate
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\insertsubsectionhead}{Authentication}
+  \begin{itemize}
+    \item \emph{Who} you are
+    \item \emph{Where} you are
+    \item What you \emph{do}
+    \item Something you \emph{have}
+    \item Something you \emph{know}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{itemize}
+    \item The most common way of authenticating is by something you know, i.e.\ 
+      passwords.
+
+    \item There is also the possibility of combining with the others to have 
+      two-factor authentication.
+
+    \item E.g., it is common to have something you know together with something 
+      you have, e.g.\ password and mobile phone.
+
+  \end{itemize}
+\end{frame}
+
+\subsection{Bootstrapping Authentication}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{itemize}
+    \item All systems have begun sometime and somewhere, and they always will.
+
+    \item Whenever a user is added to an authentication system we need 
+      a beginning for that user.
+
+    \item How do we know it is the correct user before he or she can 
+      authenticate with our system?
+
+    \item It is kind of a ``the hen or the egg'' problem.
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{itemize}
+    \item Bootstrapping authentication is about getting authentication going.
+
+    \item To do this we can have several approaches.
+
+    \item First, if we do not care about who the person is, we can just 
+      bootstrap authentication by that person setting up authentication 
+      mechanisms at account registration.
+
+    \item This is very common, usually Web services only want to authenticate 
+      the person who registered the account.
+
+    \item If we care a bit more, then we can require ID checks etc.\ to set up 
+      the authentication mechanisms using a helpdesk.
+
+    \item If we have address etc.\, then we can send the things the user needs 
+      to sign in via mail (be it snailmail or email).
+
+    \item Depending on what we base authentication, the set up of the 
+      mechanisms can be to register a password, a phone number for texting 
+      verification codes, or a fingerprint scan, and so on.
+  \end{itemize}
+\end{frame}
+
+\subsection{Problems with Bootstrapping}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{itemize}
+    \item Attacker \emph{intercepts} a password on account creation.
+    \item Attacker \emph{impersonates} the legitimate user.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{itemize}
+    \item It can be costly to manage.
+
+    \item Sometimes it is a continuous process, if the same bootstrapping 
+      procedure is also used for \emph{recovery from failure}.
+
+    \item Make sure your system can handle forgotten, lost, or aged 
+      authentication means.
+
+  \end{itemize}
+\end{frame}
+
+\subsection{Single Sign-On}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{itemize}
+    \item We could let someone else who has solved the problem already do the 
+      authentication for us, e.g.\ Google or Facebook.
+
+    \item This way the user only needs one username and password, and he or she 
+      only needs to sign in once.
+
+    \item However, this makes the SSO provider a very attractive target.
+
+    \item And they are forced to solve our problem anyway.
+
+    \item The problem is, now we need to trust them to do it properly \dots
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{itemize}
+    \item Usually these services doesn't provide reliable identities, just that 
+      it's the user who registered the account.
+
+    \item If we need real identities, then we'd need to use BankID or similar 
+      solution.
+  \end{itemize}
+\end{frame}
+
+
+\section{Authenticating}
+
+\subsection{Time of Check to Time of Use}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{itemize}
+    \item Whenever we authenticate a user, we do this for a purpose.
+
+    \item When does this authentication take place in relation to when we make 
+      use of it?
+
+    \item Usually we authenticate a user in the beginning of a session, e.g.\ 
+      at login.
+
+    \item Equally often we assume the user is authenticated during the entire 
+      session, even when fetching coffee, going by the printer -- or even when 
+      out to lunch.
+
+    \item Who knows what happens when the user is away from the computer, one 
+      thing is for sure: the computer will not know the difference!
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{itemize}
+    \item This problem can be solved with \emph{repeated authentication}.
+
+    \item We could lock our system, either manually or by timeout.
+
+    \item We could also authenticate anew when we need to do something 
+      requiring more privileges, and if it has been a while since last time -- 
+      compare with sudo(8).
+  \end{itemize}
+\end{frame}
+
+\subsection{Phising, Spoofing, Social Engineering}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{itemize}
+    \item The issue we have solved so far is to design means for the system to 
+      identify and authenticate different users.
+
+    \item We have another important problem to solve too, how does the user 
+      know it is the system he or she is authenticating him- or herself to?
+
+    \item Thus enters the problem of spoofing, phising, and social engineering 
+      \dots
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{description}
+    \item[Spoofing] A spoofing attack presents the user with a fake interface, 
+      tricking the user into believing he or she is communicating with the 
+      correct system.
+
+    \item[Phishing] A phishing attack asks users for their password, or other 
+      information, under false pretences, e.g.\ that the IT department is 
+      changing the security system and needs the user to reenter the password.
+
+    \item[Social Engineering] The technique of social engineering is to exploit 
+      fallacies in human psychology.
+      Here, the attacker might call the user and trick said user into doing 
+      what the attacker wants.
+      Or, the attacker might call helpdesk, impersonating a user and require 
+      a password reset.
+  \end{description}
+\end{frame}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{itemize}
+    \item To counter spoofing one could show the user the number of failed 
+      login attempts, the time and location for the last successful login, etc.
+
+    \item We also have the trusted path, e.g.\ Windows uses the Ctrl+Alt+Del to 
+      bring up the authentication dialogue upon login.
+
+    \item We could also have some other type of authentication of the system to 
+      the user.
+
+    % XXX make independent of secure protocols?
+    \item We will return to this subject when we discuss secure protocols.
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{itemize}
+    \item Countering phishing and social engineering is a bit harder, and 
+      requires a different approach.
+
+    \item The most obvious approach is to educate and train users to spot these 
+      attempts.
+
+    \item However, since these techniques exploit weaknesses in human nature, 
+      it can be hard.
+
+    \item But keeping strong policies for recovering from authentication 
+      failures, e.g.\ forgotten passwords, can mitigate social engineering 
+      attempts.
+
+    \item Some technological tools and good practices can support users in 
+      avoiding phishing attempts too.
+  \end{itemize}
+\end{frame}
+
+\subsection{Guessing Passwords}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{itemize}
+    \item There are generally two approaches to guessing passwords.
+
+    \item The first one is exhaustive search (brute force), which is to test 
+      all possible combinations of valid characters.
+
+    \item The second one is educated search, here we use some more knowledge.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{itemize}
+    \item Possible educated search is using dictionaries, adapt to password 
+      policy, etc.
+
+    \item Some more advanced techniques for guessing passwords have also been 
+      developed.
+
+    \item E.g.\ one could take grammar into account, depending on the password 
+      type~\cite{Bonneau2012ghs,Bonneau2012lpo}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{itemize}
+    \item There are also some measures to be taken to counter password 
+      guessing.
+
+    \item First, change default passwords, those are the obvious first guess.
+
+    \item Increase the length of the passwords.
+
+    \item We could increase complexity, we know this is popular --- 
+      but~\cite{Komanduri2011opa} shows it is worse for users than further 
+      increasing the length.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{itemize}
+    \item We can also generate passwords for users, although this might reduce 
+      security by use of post-it notes.
+
+    \item We can also introduce password ageing, can be annoying with too short 
+      intervals -- and will reduce security once users introduce systems to 
+      remember their last changed password.
+
+    \item Finally we can remove online guessing by introducing limited login 
+      attempts, however at the cost of possible denial of service.
+
+  \end{itemize}
+\end{frame}
+
+
+\section[Securing]{Securing Authentication}
+
+\subsection{The Password File}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{itemize}
+    \item Once we have data which can be used to authenticate users, we need to 
+      store this data somewhere for future authentication.
+
+    \item Traditionally, in the case of passwords, there has always been a 
+      password file (or database) containing all users' passwords.
+
+    \item Naturally we have to protect this data, otherwise if someone got hold 
+      of it he or she could impersonate any user in the system.
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{itemize}
+    \item There are of course different approaches to protect it.
+
+    \item One way is to encrypt it.
+
+    \item Another is to let the operating system's or database's access control 
+      protect it.
+
+    \item A third way is to do both.
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{itemize}
+    \item To encrypt the file, we do not actually need to encrypt it.
+
+    \item We could apply an unreversible transformation on all the passwords.
+
+    \item Using a one-way function, or cryptographic hash function, we can make 
+      the passwords unreadable but still verifiable.
+
+    \item Let \(h\) be a hash function and \(p\) a password, then we simply 
+      compute \(h(p)\) to store in our database.
+
+    \item When the user wants to authenticate with a password \(p^\prime\) we 
+      simply compute \(h(p^\prime)\) and compare to the stored \(h(p)\).
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{itemize}
+    \item The function \(h\) is selected to be a very slow one-way function, 
+      maybe we iterate its application to the password (like 10\,000 to 
+      100\,000 times, not only 5).
+
+    \item This way we can slow down guessing attacks should anyone ever come 
+      across our password database.
+
+    \item However, as our password file is currently structured, we can still 
+      see if two users have the same password -- they would have the same hash 
+      value.
+
+    \item This way we can guess the password for all users at once: we make 
+      a guess, check if it matches \emph{any} user's password.
+
+    \item To counter this we add a \emph{salt}, this is a small value (e.g.\ 
+      128 bits) selected randomly for each user.
+
+    \item This way all password hashes will be unique and the attack would have 
+      to be on a per-password basis.
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{itemize}
+    \item bcrypt implements all this functionality.
+    \item It should also be available in most languages and libraries.
+  \end{itemize}
+\end{frame}
+
+\subsection{Alternative Approaches}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{itemize}
+    \item We mentioned in the beginning some alternatives to passwords, these 
+      were:
+      \begin{itemize}
+        \item who you are,
+        \item where you are,
+        \item what you do,
+        \item something you know, and
+        \item something you have.
+      \end{itemize}
+
+    \item Using two or more of these together gave us two- or multiple-factor 
+      authentication, this reduces the risk of false positives.
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{itemize}
+    \item ``Who you are'' is becoming more popular as a basis for 
+      authentication.
+
+    \item This covers biometrics like fingerprints or iris scans.
+
+    \item ``What you do'' is also a biometric, however, the focus of this one 
+      is on things you do, e.g.\ how you write your signature -- including the 
+      resulting signature, the writing speed, the pressure at different points, 
+      etc.
+
+    \item Finally, ``where you are'' is also becoming easier to apply with 
+      positioning systems in smartphones and IP addresses of computers.
+
+    \item E.g.\ Google employs where you are if you have enabled two-factor 
+      authentication, then you will have too verify with your phone if your IP 
+      address changes.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{itemize}
+    \item You can also take this to the new level.
+
+      % XXX add ref to IEEE Security and Privacy article on Web fingerprinting
+      % XXX and tracking
+    \item Some Web sites use visitor fingerprinting techniques to identify 
+      users.
+
+    \item This can be used to detect if the real user is authenticating or not.
+
+    \item However, these fingerprinting mechanisms are typically used for other 
+      purposes, to track users' browsing habits to serve targeted ads to them.
+
+    \item EFF developed a tool to illustrate the privacy invasion of browser 
+      fingerprinting in~\cite{Eckersley2010hui}.
+      \begin{itemize}
+        \item You can test browser fingerprinting at URL 
+          \url{https://panopticlick.eff.org/}.
+      \end{itemize}
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{itemize}
+    \item A problem with all of these is the accuracy and failure rate of the 
+      technologies needed to sample the data used in authentication.
+
+    \item E.g.\ a fingerprint reader is prone to error due to greasy fingers, 
+      complex passwords can be typed incorrectly, etc.
+
+    \item And since it introduces another system in some cases, it also 
+      introduces trust issues for the user -- is this an authentic fingerprint 
+      reader, is it really the Google sign-in in this IFRAME, or is it one that 
+      will steal my credentials?
+
+  \end{itemize}
+\end{frame}
+
+% XXX include failure rates from Gollmann
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{References}
+	\small
+  \printbibliography{}
+\end{frame}
+
+\end{document}
