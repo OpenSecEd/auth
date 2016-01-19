@@ -1,0 +1,300 @@
+% $Id$
+%\documentclass[handout]{beamer}
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[swedish,english]{babel}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{keystroke}
+
+\setbeamertemplate{bibliography item}[text]
+\usepackage[natbib,style=alphabetic,maxbibnames=99]{biblatex}
+\addbibresource{keyauth.bib}
+
+\mode<presentation>{%
+  \usetheme{Frankfurt}
+  \setbeamercovered{transparent}
+  \usecolortheme{seagull}
+}
+\setbeamertemplate{footline}{\insertframenumber}
+
+\title{%
+  Key Management and Authentication
+}
+\author{Daniel Bosk}
+\institute[MIUN IKS]{%
+  Department of Information and Communication Systems,\\
+  Mid Sweden University, SE-851\,70 Sundsvall.
+}
+\date{\today}
+
+%\pgfdeclareimage[height=0.65cm]{university-logo}{MU_logotyp_int_CMYK.pdf}
+%\logo{\pgfuseimage{university-logo}}
+
+\AtBeginSection[]{%
+  \begin{frame}<beamer>{Overview}
+		\tableofcontents[currentsection]
+	\end{frame}
+}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage{}
+\end{frame}
+
+\begin{frame}{Overview}
+	\tableofcontents
+	% You might wish to add the option [pausesections]
+\end{frame}
+
+
+% Since this a solution template for a generic talk, very little can
+% be said about how it should be structured. However, the talk length
+% of between 15min and 45min and the theme suggest that you stick to
+% the following rules:  
+
+% - Exactly two or three sections (other than the summary).
+% - At *most* three subsections per section.
+% - Talk about 30s to 2min per frame. So there should be between about
+%   15 and 30 frames, all told.
+
+
+\section{Symmetric Key Distribution}
+
+\subsection{Symmetric Crypto}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{figure}
+    \includegraphics[width=0.7\textwidth]{symmetric.eps}
+    \caption{An overview of symmetric crypto.
+      Image: \cite{Stallings2013nse}.
+    }
+  \end{figure}
+\end{frame}
+
+\subsection{Key Distribution Centre (KDC)}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{itemize}
+    \item Deliver a key \(k\) from \(A\) to \(B\).
+      By themselves or third party.
+
+    \item If \(A\) and \(B\) share a key \(k\), generate a key \(k^\prime\) and 
+      transmit it using \(k\):
+      \(A\to B\colon E_k(k^\prime)\).
+
+    \item Secure connection to third party \(C\), \(C\) delivers key to \(A\) 
+      and \(B\).
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{description}
+    \item[Session Key] Temporary key used between \(A\) and \(B\).
+
+    \item[Permanent Key] Key used to distribute session keys.
+
+    \item[Key Distribution Centre] The central entity with which permanent keys 
+      are shared and by whom session keys are generated.
+
+  \end{description}
+\end{frame}
+
+\subsection{Authentication}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{figure}
+    \includegraphics[height=0.7\textheight]{kerberos-overview.eps}
+    \caption{An overview of Kerberos.
+      Image: \cite{Stallings2013nse}.
+    }
+  \end{figure}
+\end{frame}
+
+\subsection{Kerberos IV}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{figure}
+    \includegraphics[height=0.7\textheight]{kerberos-ver4.eps}
+    \caption{An overview of Kerberos IV authentication dialogue.
+      Image: \cite{Stallings2013nse}.
+    }
+  \end{figure}
+\end{frame}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{figure}
+    \includegraphics[height=0.7\textheight]{kerberosIV-detailed.eps}
+    \caption{Kerberos IV authentication protocol.
+      Image: \cite{Stallings2013nse}.
+    }
+  \end{figure}
+\end{frame}
+
+\subsection{Kerberos V}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{figure}
+    \includegraphics[height=0.7\textheight]{kerberosV-detailed.eps}
+    \caption{Kerberos V authentication protocol.
+      Image: \cite{Stallings2013nse}.
+    }
+  \end{figure}
+\end{frame}
+
+\begin{frame}{\insertsubsectionhead}{Environmental Differences}
+  \begin{itemize}
+    \item Encryption system dependence.
+    \item Internet protocol dependence.
+    \item Byte ordering.
+    \item Ticket lifetime.
+    \item Authentication forwarding.
+    \item Interrealm authentication.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\insertsubsectionhead}{Technical differences}
+  \begin{itemize}
+    \item Double encryption.
+    \item Propagating Cipher Block Chaining instead of CBC.
+    \item Session and subsession keys.
+    \item Password attacks.
+  \end{itemize}
+\end{frame}
+
+
+\section{Asymmetric Key Distribution}
+
+\subsection{Asymmetric Crypto and Hash Functions}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{figure}
+    \includegraphics[height=0.7\textheight]{asymmetric.eps}
+    \caption{An overview of asymmetric crypto.
+      Image: \cite{Stallings2013nse}.
+    }
+  \end{figure}
+\end{frame}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{figure}
+    \includegraphics[height=0.7\textheight]{mac-hash.eps}
+    \caption{An overview of using hash functions for message integrity and 
+      authentication.
+      Image: \cite{Stallings2013nse}.
+    }
+  \end{figure}
+\end{frame}
+
+\subsection{Diffie--Hellman Key Exchange}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{figure}
+    \includegraphics[height=0.7\textheight]{dhkx.eps}
+    \caption{A schematic overview of the Diffie--Hellan Key Exchange algorithm.
+      Image: \cite{Stallings2013nse}.
+    }
+  \end{figure}
+\end{frame}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{figure}
+    \includegraphics[height=0.7\textheight]{dhkx-mitm.eps}
+    \caption{Schematic overview of a Man-in-the-Middle Attack.
+      Image: \cite{Stallings2013nse}.
+    }
+  \end{figure}
+\end{frame}
+
+\subsection{Public-key Certificates}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{figure}
+    \includegraphics[width=\textwidth]{cert-overview.eps}
+    \caption{An overview of use of public-key certificates.
+      Image: \cite{Stallings2013nse}.
+    }
+  \end{figure}
+\end{frame}
+
+\begin{frame}{\insertsubsectionhead}{X.509}
+  \begin{figure}
+    \includegraphics[height=0.7\textheight]{x509-format.eps}
+    \caption{An overview of X.509 certificate format.
+      Image: \cite{Stallings2013nse}.
+    }
+  \end{figure}
+\end{frame}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{figure}
+    \includegraphics[height=0.7\textheight]{sign-overview.eps}
+    \caption{An overview of the digital signature process.
+      Image: \cite{Stallings2013nse}.
+    }
+  \end{figure}
+\end{frame}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{figure}
+    \includegraphics[height=0.7\textheight]{x509-hier.eps}
+    \caption{The X.509 certificate hierarchy.
+      Image: \cite{Stallings2013nse}.
+    }
+  \end{figure}
+\end{frame}
+
+%\subsection{Public-key Distribution of Secret Keys}
+%
+%\begin{frame}{\insertsubsectionhead}
+%\end{frame}
+%
+%\subsection{Pretty Good Privacy}
+%
+%\begin{frame}{\insertsubsectionhead}
+%\end{frame}
+%
+%\subsection{Public-key Infrastructure (PKI)}
+%
+%\begin{frame}{\insertsubsectionhead}
+%\end{frame}
+%
+
+\section{Federated Identity Management}
+
+\subsection{Identity Management}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{figure}
+    \includegraphics[height=0.7\textheight]{idmgmt-arch.eps}
+    \caption{An overview of a generic identity management system.
+      Image: \cite{Stallings2013nse}.
+    }
+  \end{figure}
+\end{frame}
+
+\subsection{Identity Federation}
+
+\begin{frame}{\insertsubsectionhead}
+  \begin{figure}
+    \includegraphics[height=0.7\textheight]{federated.eps}
+    \caption{An overview of federated identity systems.
+      Image: \cite{Stallings2013nse}.
+    }
+  \end{figure}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[allowframebreaks]{Referenser}
+	\small
+  \printbibliography
+\end{frame}
+
+\end{document}
+

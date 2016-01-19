@@ -29,6 +29,8 @@ The source files are structured as follows:
 
 - `overview` contains slides to give the students a wide understanding of 
   authentication and its possibilities.
+- `keyauth` contains slides for a lecture on key management and authentication, 
+  mainly focusing on Kerberos and X.509.
 
 In each directory the files are structured as follows:
 
