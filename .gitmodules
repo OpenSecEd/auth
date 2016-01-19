@@ -2,3 +2,7 @@
 	path = makefiles
 	url = https://github.com/dbosk/makefiles.git
 	branch = master
+[submodule "passwd"]
+	path = passwd
+	url = https://github.com/OpenSecEd/passwd.git
+	branch = master

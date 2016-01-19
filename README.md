@@ -31,6 +31,8 @@ The source files are structured as follows:
   authentication and its possibilities.
 - `keyauth` contains slides for a lecture on key management and authentication, 
   mainly focusing on Kerberos and X.509.
+- `passwd` is a learning module about passwords.  It contains assignments on 
+  that topic.
 
 In each directory the files are structured as follows:
 
