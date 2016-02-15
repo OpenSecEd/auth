@@ -2,7 +2,7 @@
 \documentclass{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[swedish,english]{babel}
+\usepackage[swedish,british]{babel}
 \usepackage{url}
 \usepackage{graphicx}
 \usepackage{color}
@@ -13,29 +13,55 @@
 \usepackage[binary,squaren]{SIunits}
 \usepackage{listings}
 
-\setbeamertemplate{bibliography item}[text]
 \usepackage[natbib,style=alphabetic,maxbibnames=99]{biblatex}
 \addbibresource{overview.bib}
 
-\mode<presentation>{%
-  \usetheme{Frankfurt}
-  \setbeamercovered{transparent}
-  \usecolortheme{seagull}
+\usepackage{xparse}
+\ProvideDocumentEnvironment{exercise}{o}{%
+  \setbeamercolor{block body}{bg=yellow!30,fg=black}
+  \setbeamercolor{block title}{bg=yellow,fg=black}
+  \IfValueTF{#1}{%
+    \begin{block}{Exercise: #1}
+  }{%
+    \begin{block}{Exercise}
+  }
+}{%
+  \end{block}
 }
-\setbeamertemplate{footline}{\insertframenumber}
+
+\mode<presentation>{%
+  \usetheme{Berlin}
+  \setbeamertemplate{footline}{%
+    \begin{beamercolorbox}[colsep=1.5pt]{upper separation line foot}
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
+      leftskip=.3cm,rightskip=.3cm plus1fil]{author in head/foot}%
+      \leavevmode{\usebeamerfont{author in head/foot}\insertshortauthor}%
+      \hfill%
+      {\usebeamerfont{institute in head/foot}%
+        \usebeamercolor[fg]{institute in head/foot}\insertshortinstitute}%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
+      leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+      {\usebeamerfont{title in head/foot}\insertshorttitle}%
+      \hfill\insertframenumber%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[colsep=1.5pt]{lower separation line foot}
+    \end{beamercolorbox}
+  }
+  \setbeamercovered{transparent}
+  \setbeamertemplate{bibliography item}[text]
+}
 
 \title[Authentication]{%
   Identification and Authentication
 }
-\author{Daniel Bosk\footnote{%
-  This work is licensed under the Creative Commons Attribution-ShareAlike 3.0 
-  Unported license.
-	To view a copy of this license, visit 
-	\url{http://creativecommons.org/licenses/by-sa/3.0/}.
-}}
-\institute[MIUN ICS]{%
-  Department of Information and Communication Systems (ICS),\\
-  Mid Sweden University, Sundsvall.
+\author{%
+  Daniel Bosk%
+}
+\institute[MIUN]{%
+  Department of Information and Communication Systems,\\
+  Mid Sweden University, Sundsvall
 }
 \date{\today}
 
@@ -43,27 +69,15 @@
 %\logo{\pgfuseimage{university-logo}}
 
 \AtBeginSection[]{%
-  \begin{frame}<beamer>{Overview}
+  \begin{frame}<beamer>
     \tableofcontents[currentsection]
   \end{frame}
 }
-%\AtBeginSubsection[]{%
-%  \begin{frame}<beamer>
-%    \begin{center}
-%      \insertsectionhead
-%    \end{center}
-%  \end{frame}
-%}
 
 \begin{document}
 
 \begin{frame}
   \titlepage{}
-\end{frame}
-
-\begin{frame}{Overview}
-  \tableofcontents
-  % You might wish to add the option [pausesections]
 \end{frame}
 
 
@@ -82,110 +96,170 @@
 
 \subsection{What Is Authentication?}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item Authentication is the process of verifying the identity claimed by 
       some system entity.
 
-    \item I.e.\ first you enter your username to \emph{identify} yourself.
+      \pause{}
 
-    \item Then you enter your password to \emph{authenticate} that you are 
-      truly you.
+      \begin{description}
+        \item[Identification] First you enter your username to \emph{identify} 
+          yourself.
+
+          \pause{}
+
+        \item[Authentication] Then you enter your password to 
+          \emph{authenticate} that you are truly you.
+      \end{description}
 
   \end{itemize}
 \end{frame}
 
 \subsection{Types of Identification and Authentication}
 
-\begin{frame}{\insertsubsectionhead}{Identification}
-  \begin{itemize}
-    \item Username or User ID
-    \item The person who opened the account
-    \item Personal Identification Number (Swe.\ personnummer, Eng.\ Social 
-      Security Number)
-    \item Fingerprint
-    \item Iris scan
-    \item DNA sequence \dots
-    \item Cryptographic key or certificate
-  \end{itemize}
+\begin{frame}
+  \begin{example}[Methods for identification]
+    \begin{itemize}
+      \item Username or User ID
+      \item The person who opened the account
+      \item Personal Identification Number (Swe.\ personnummer, Eng.\ Social 
+        Security Number)
+
+        \pause{}
+
+      \item Fingerprint
+      \item Iris scan
+      \item DNA sequence \dots
+    \end{itemize}
+  \end{example}
+
+  \pause{}
+
+  \begin{exercise}
+    Any other methods of identification that you have encountered?
+  \end{exercise}
 \end{frame}
 
-\begin{frame}{\insertsubsectionhead}{Authentication}
-  \begin{itemize}
-    \item \emph{Who} you are
-    \item \emph{Where} you are
-    \item What you \emph{do}
-    \item Something you \emph{have}
-    \item Something you \emph{know}
-  \end{itemize}
+\begin{frame}
+  \begin{example}[Methods for authentication]
+    \begin{itemize}
+      \item Something you \emph{know}
+
+        \pause{}
+
+      \item Something you \emph{have}
+
+        \pause{}
+
+      \item \emph{Where} you are
+
+        \pause{}
+
+      \item \emph{Who} you are
+      \item What you \emph{do}
+    \end{itemize}
+  \end{example}
 \end{frame}
 
-\begin{frame}{\insertsubsectionhead}
-  \begin{itemize}
-    \item The most common way of authenticating is by something you know, i.e.\ 
-      passwords.
+\begin{frame}
+  \begin{example}[Single-factor authentication]
+    \begin{description}
+      \item[Identification] Username or similar
+      \item[Authentication] Something you know, i.e.\ a password
+    \end{description}
+  \end{example}
 
-    \item There is also the possibility of combining with the others to have 
-      two-factor authentication.
+  \pause{}
 
-    \item E.g., it is common to have something you know together with something 
-      you have, e.g.\ password and mobile phone.
+  \begin{example}[Multi-factor authentication]
+    \begin{description}
+      \item[Identification] Username or similar
+      \item[Authentication] Something you know together with something you 
+        have, e.g.\ password and mobile phone
+    \end{description}
+  \end{example}
+\end{frame}
 
-  \end{itemize}
+\begin{frame}
+  \begin{exercise}
+    What other authentication methods have you encountered?
+  \end{exercise}
 \end{frame}
 
 \subsection{Bootstrapping Authentication}
 
-\begin{frame}{\insertsubsectionhead}
-  \begin{itemize}
-    \item All systems have begun sometime and somewhere, and they always will.
+\begin{frame}
+  \begin{block}{Bootstrapping: A hen-and-egg problem}
+    \begin{itemize}
+      \item Alice is not registered in our authentication system.
+      \item We want to register her as a user in our system.
 
-    \item Whenever a user is added to an authentication system we need 
-      a beginning for that user.
+        \pause{}
 
-    \item How do we know it is the correct user before he or she can 
-      authenticate with our system?
+      \item How do we know Alice is actually Alice?
+      \item Since she's not registered we cannot authenticate her.
+    \end{itemize}
+  \end{block}
 
-    \item It is kind of a ``the hen or the egg'' problem.
+  \pause{}
 
-  \end{itemize}
+  \begin{exercise}
+    \begin{itemize}
+      \item Any quick workarounds that comes to mind?
+      \item When is this a problem and when is it not?
+    \end{itemize}
+  \end{exercise}
 \end{frame}
 
-\begin{frame}{\insertsubsectionhead}
-  \begin{itemize}
-    \item Bootstrapping authentication is about getting authentication going.
+\begin{frame}
+  \begin{solution}[We don't care who Alice is]
+    \begin{itemize}
+      \item We simply set up authentication when Alice creates the account.
+      \item Now we can authenticate whoever set up the account.
+    \end{itemize}
+  \end{solution}
 
-    \item To do this we can have several approaches.
+  \pause{}
 
-    \item First, if we do not care about who the person is, we can just 
-      bootstrap authentication by that person setting up authentication 
-      mechanisms at account registration.
-
-    \item This is very common, usually Web services only want to authenticate 
-      the person who registered the account.
-
-    \item If we care a bit more, then we can require ID checks etc.\ to set up 
-      the authentication mechanisms using a helpdesk.
-
-    \item If we have address etc.\, then we can send the things the user needs 
-      to sign in via mail (be it snailmail or email).
-
-    \item Depending on what we base authentication, the set up of the 
-      mechanisms can be to register a password, a phone number for texting 
-      verification codes, or a fingerprint scan, and so on.
-  \end{itemize}
+  \begin{example}
+    This is the solution used by most web services.
+  \end{example}
 \end{frame}
+
+\begin{frame}
+  \begin{solution}[We care who Alice actually is]
+    \begin{itemize}
+      \item We can require ID checks etc.\ to set up the authentication 
+        mechanisms using a helpdesk.
+
+        \pause{}
+
+      \item If we have address etc.\, then we can send the credentials via mail 
+        (be it snailmail or email).
+
+    \end{itemize}
+  \end{solution}
+
+  \pause{}
+
+  \begin{example}[The university account]
+    This is how your university account was set up.
+  \end{example}
+\end{frame}
+
+% XXX Continue reworking material below
 
 \subsection{Problems with Bootstrapping}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item Attacker \emph{intercepts} a password on account creation.
     \item Attacker \emph{impersonates} the legitimate user.
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item It can be costly to manage.
 
@@ -200,7 +274,7 @@
 
 \subsection{Single Sign-On}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item We could let someone else who has solved the problem already do the 
       authentication for us, e.g.\ Google or Facebook.
@@ -216,7 +290,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item Usually these services doesn't provide reliable identities, just that 
       it's the user who registered the account.
@@ -231,7 +305,7 @@
 
 \subsection{Time of Check to Time of Use}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item Whenever we authenticate a user, we do this for a purpose.
 
@@ -251,7 +325,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item This problem can be solved with \emph{repeated authentication}.
 
@@ -265,7 +339,7 @@
 
 \subsection{Phising, Spoofing, Social Engineering}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item The issue we have solved so far is to design means for the system to 
       identify and authenticate different users.
@@ -278,7 +352,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{description}
     \item[Spoofing] A spoofing attack presents the user with a fake interface, 
       tricking the user into believing he or she is communicating with the 
@@ -297,7 +371,7 @@
   \end{description}
 \end{frame}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item To counter spoofing one could show the user the number of failed 
       login attempts, the time and location for the last successful login, etc.
@@ -314,7 +388,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item Countering phishing and social engineering is a bit harder, and 
       requires a different approach.
@@ -336,7 +410,7 @@
 
 \subsection{Guessing Passwords}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item There are generally two approaches to guessing passwords.
 
@@ -347,7 +421,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item Possible educated search is using dictionaries, adapt to password 
       policy, etc.
@@ -360,7 +434,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item There are also some measures to be taken to counter password 
       guessing.
@@ -375,7 +449,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item We can also generate passwords for users, although this might reduce 
       security by use of post-it notes.
@@ -395,7 +469,7 @@
 
 \subsection{The Password File}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item Once we have data which can be used to authenticate users, we need to 
       store this data somewhere for future authentication.
@@ -409,7 +483,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item There are of course different approaches to protect it.
 
@@ -423,7 +497,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item To encrypt the file, we do not actually need to encrypt it.
 
@@ -441,7 +515,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item The function \(h\) is selected to be a very slow one-way function, 
       maybe we iterate its application to the password (like 10\,000 to 
@@ -466,7 +540,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item bcrypt implements all this functionality.
     \item It should also be available in most languages and libraries.
@@ -475,7 +549,7 @@
 
 \subsection{Alternative Approaches}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item We mentioned in the beginning some alternatives to passwords, these 
       were:
@@ -493,7 +567,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item ``Who you are'' is becoming more popular as a basis for 
       authentication.
@@ -514,13 +588,13 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item You can also take this to the new level.
 
-      % XXX add ref to IEEE Security and Privacy article on Web fingerprinting
+      % XXX add ref to IEEE Security and Privacy article on web fingerprinting
       % XXX and tracking
-    \item Some Web sites use visitor fingerprinting techniques to identify 
+    \item Some web sites use visitor fingerprinting techniques to identify 
       users.
 
     \item This can be used to detect if the real user is authenticating or not.
@@ -538,7 +612,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item A problem with all of these is the accuracy and failure rate of the 
       technologies needed to sample the data used in authentication.
