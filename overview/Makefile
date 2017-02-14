@@ -1,9 +1,10 @@
 .PHONY: all
 all: overview.pdf
 
-SRC=		overview.tex abstract.tex overview.bib
+SRC+=		overview.tex abstract.tex overview.bib
+SRC+=		preamble.tex contents.tex
 
-overview.pdf: ${FILES}
+overview.pdf: ${SRC}
 
 authorization.png:
 	wget -O $@ http://imgs.xkcd.com/comics/authorization.png
