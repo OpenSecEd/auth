@@ -29,6 +29,26 @@
   \end{block}
 }
 
+\ProvideDocumentEnvironment{idea}{o}{%
+  \IfValueTF{#1}{%
+    \begin{block}{Idea: #1}
+  }{%
+    \begin{block}{Idea}
+  }
+}{%
+  \end{block}
+}
+
+\ProvideDocumentEnvironment{remark}{o}{%
+  \IfValueTF{#1}{%
+    \begin{alertblock}{Remark: #1}
+  }{%
+    \begin{alertblock}{Remark}
+  }
+}{%
+  \end{alertblock}
+}
+
 \mode<presentation>{%
   \usetheme{Berlin}
   \setbeamertemplate{footline}{%
@@ -92,9 +112,9 @@
 %   15 and 30 frames, all told.
 
 
-\section[Bootstrapping]{Bootstrapping Authentication}
+\section{Introduction}
 
-\subsection{What Is Authentication?}
+\subsection{Identification and Authentication}
 
 \begin{frame}
   \begin{itemize}
@@ -115,8 +135,6 @@
 
   \end{itemize}
 \end{frame}
-
-\subsection{Types of Identification and Authentication}
 
 \begin{frame}
   \begin{example}[Methods for identification]
@@ -162,6 +180,8 @@
   \end{example}
 \end{frame}
 
+\subsection{Multi-factor authentication}
+
 \begin{frame}
   \begin{example}[Single-factor authentication]
     \begin{description}
@@ -187,7 +207,10 @@
   \end{exercise}
 \end{frame}
 
-\subsection{Bootstrapping Authentication}
+
+\section[Bootstrapping]{Bootstrapping Authentication}
+
+\subsection{What is bootstrapping?}
 
 \begin{frame}
   \begin{block}{Bootstrapping: A hen-and-egg problem}
@@ -235,7 +258,7 @@
 
         \pause{}
 
-      \item If we have address etc.\, then we can send the credentials via mail 
+      \item If we have address etc., then we can send the credentials via mail 
         (be it snailmail or email).
 
     \end{itemize}
@@ -248,15 +271,44 @@
   \end{example}
 \end{frame}
 
-% XXX Continue reworking material below
+\begin{frame}
+  \begin{example}[Signal, WhatsApp, \dots]
+    \begin{itemize}
+      \item The identity is a (mobile) phone number.
+      \item Send a text message with a code.
+    \end{itemize}
+  \end{example}
+
+  \pause{}
+
+  \begin{remark}
+    \begin{itemize}
+      \item Phone provider can impersonate.
+      \item Government can impersonate (forcing phone provider).
+    \end{itemize}
+  \end{remark}
+\end{frame}
 
 \subsection{Problems with Bootstrapping}
 
 \begin{frame}
-  \begin{itemize}
+  \begin{enumerate}
     \item Attacker \emph{intercepts} a password on account creation.
+      \begin{itemize}
+        \item User starts bootstrapping.
+        \item Password is sent to user.
+        \item Attacker grabs password.
+      \end{itemize}
+
+      \pause{}
+
     \item Attacker \emph{impersonates} the legitimate user.
-  \end{itemize}
+      \begin{itemize}
+        \item Attacker starts bootstrapping.
+        \item User remains unaware.
+        \item Service cannot distinguish attacker and user.
+      \end{itemize}
+  \end{enumerate}
 \end{frame}
 
 \begin{frame}
@@ -266,7 +318,7 @@
     \item Sometimes it is a continuous process, if the same bootstrapping 
       procedure is also used for \emph{recovery from failure}.
 
-    \item Make sure your system can handle forgotten, lost, or aged 
+    \item Make sure the system can handle forgotten, lost or aged 
       authentication means.
 
   \end{itemize}
@@ -277,7 +329,7 @@
 \begin{frame}
   \begin{itemize}
     \item We could let someone else who has solved the problem already do the 
-      authentication for us, e.g.\ Google or Facebook.
+      authentication for us.
 
     \item This way the user only needs one username and password, and he or she 
       only needs to sign in once.
@@ -291,13 +343,18 @@
 \end{frame}
 
 \begin{frame}
-  \begin{itemize}
-    \item Usually these services doesn't provide reliable identities, just that 
-      it's the user who registered the account.
+  \begin{example}[We don't care who Alice is]
+    We can use Google, Facebook etc.
+  \end{example}
 
-    \item If we need real identities, then we'd need to use BankID or similar 
-      solution.
-  \end{itemize}
+  \begin{example}[We care who Alice is]
+    We can use e.g.\ BankID.
+  \end{example}
+
+  \begin{remark}
+    The SSO-service must have done bootstrapping as rigorously as we would 
+    have.
+  \end{remark}
 \end{frame}
 
 
@@ -306,107 +363,166 @@
 \subsection{Time of Check to Time of Use}
 
 \begin{frame}
-  \begin{itemize}
-    \item Whenever we authenticate a user, we do this for a purpose.
+  \begin{exercise}
+    \begin{itemize}
+      \item Whenever we authenticate a user, we do this for a purpose.
 
-    \item When does this authentication take place in relation to when we make 
-      use of it?
-
-    \item Usually we authenticate a user in the beginning of a session, e.g.\ 
-      at login.
-
-    \item Equally often we assume the user is authenticated during the entire 
-      session, even when fetching coffee, going by the printer -- or even when 
-      out to lunch.
-
-    \item Who knows what happens when the user is away from the computer, one 
-      thing is for sure: the computer will not know the difference!
-
-  \end{itemize}
+      \item When does this authentication take place in relation to when we make 
+        use of it?
+    \end{itemize}
+  \end{exercise}
 \end{frame}
 
 \begin{frame}
-  \begin{itemize}
-    \item This problem can be solved with \emph{repeated authentication}.
+  \begin{example}
+    \begin{itemize}
+      \item Usually we authenticate a user in the beginning of a session, e.g.\ 
+        at login.
 
-    \item We could lock our system, either manually or by timeout.
+      \item Equally often we assume the user is authenticated during the entire 
+        session, even when fetching coffee, going by the printer -- or even when 
+        out to lunch.
 
-    \item We could also authenticate anew when we need to do something 
-      requiring more privileges, and if it has been a while since last time -- 
-      compare with sudo(8).
-  \end{itemize}
-\end{frame}
+      \item Who knows what happens when the user is away from the computer, one 
+        thing is for sure: the computer will not know the difference!
 
-\subsection{Phising, Spoofing, Social Engineering}
-
-\begin{frame}
-  \begin{itemize}
-    \item The issue we have solved so far is to design means for the system to 
-      identify and authenticate different users.
-
-    \item We have another important problem to solve too, how does the user 
-      know it is the system he or she is authenticating him- or herself to?
-
-    \item Thus enters the problem of spoofing, phising, and social engineering 
-      \dots
-  \end{itemize}
+    \end{itemize}
+  \end{example}
 \end{frame}
 
 \begin{frame}
-  \begin{description}
-    \item[Spoofing] A spoofing attack presents the user with a fake interface, 
-      tricking the user into believing he or she is communicating with the 
-      correct system.
+  \begin{solution}
+    \begin{itemize}
+      \item This problem can be solved with \emph{repeated authentication}.
 
-    \item[Phishing] A phishing attack asks users for their password, or other 
-      information, under false pretences, e.g.\ that the IT department is 
-      changing the security system and needs the user to reenter the password.
+      \item We could lock our system, either manually or by time-out.
 
-    \item[Social Engineering] The technique of social engineering is to exploit 
-      fallacies in human psychology.
-      Here, the attacker might call the user and trick said user into doing 
-      what the attacker wants.
-      Or, the attacker might call helpdesk, impersonating a user and require 
-      a password reset.
-  \end{description}
+      \item We could also authenticate anew when we need to do something 
+        requiring more privileges, and if it has been a while since last time -- 
+        compare with sudo(8).
+    \end{itemize}
+  \end{solution}
+\end{frame}
+
+\subsection{Phishing, Spoofing, Social Engineering}
+
+\begin{frame}
+  \begin{remark}
+    \begin{itemize}
+      \item The issue we have solved so far is to design means for the system to 
+        identify and authenticate different users.
+
+      \item We have another important problem to solve too, how does the user 
+        know it is the system he or she is authenticating him- or herself to?
+
+      \item Thus enters the problem of spoofing, phising, and social engineering 
+        \dots
+    \end{itemize}
+  \end{remark}
 \end{frame}
 
 \begin{frame}
-  \begin{itemize}
-    \item To counter spoofing one could show the user the number of failed 
-      login attempts, the time and location for the last successful login, etc.
-
-    \item We also have the trusted path, e.g.\ Windows uses the Ctrl+Alt+Del to 
-      bring up the authentication dialogue upon login.
-
-    \item We could also have some other type of authentication of the system to 
-      the user.
-
-    % XXX make independent of secure protocols?
-    \item We will return to this subject when we discuss secure protocols.
-
-  \end{itemize}
+  \begin{definition}[Spoofing/Masquerading]
+    \begin{itemize}
+      \item Attacker masquerades as authorized.
+      \item To a system: impersonates authorized user.
+      \item To a user: impersonates authorized system/UI.
+    \end{itemize}
+  \end{definition}
 \end{frame}
 
 \begin{frame}
-  \begin{itemize}
-    \item Countering phishing and social engineering is a bit harder, and 
-      requires a different approach.
+  \begin{definition}[Phishing]
+    \begin{itemize}
+      \item A masquerading attack trying to collect sensitive data.
+      \item E.g.\ email from IT department requesting the password.
+    \end{itemize}
+  \end{definition}
 
-    \item The most obvious approach is to educate and train users to spot these 
-      attempts.
+  \pause{}
 
-    \item However, since these techniques exploit weaknesses in human nature, 
-      it can be hard.
-
-    \item But keeping strong policies for recovering from authentication 
-      failures, e.g.\ forgotten passwords, can mitigate social engineering 
-      attempts.
-
-    \item Some technological tools and good practices can support users in 
-      avoiding phishing attempts too.
-  \end{itemize}
+  \begin{definition}[Social Engineering]
+    \begin{itemize}
+      \item The general class of attacks on humans.
+      \item Exploits fallacies in human psychology.
+      \item Parent category of phishing.
+      \item Can be very advanced.
+    \end{itemize}
+  \end{definition}
 \end{frame}
+
+\begin{frame}
+  \begin{exercise}
+    How can we prevent spoofed interfaces?
+  \end{exercise}
+\end{frame}
+
+\begin{frame}
+  \begin{example}
+    \begin{itemize}
+      \item Show the user the number of failed login attempts.
+      \item Show the time and location for the last successful login.
+      \item This allows for \emph{detection}.
+    \end{itemize}
+  \end{example}
+
+  \begin{example}
+    \begin{itemize}
+      \item We also have the trusted path.
+      \item E.g.\ Windows uses the Ctrl+Alt+Del to bring up the authentication 
+        dialogue upon login.
+      \item This allows for \emph{prevention}.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{remark}
+    \begin{itemize}
+      \item We authentication of the system to the user.
+      \item In some sense, it boils down to trust.
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\begin{frame}
+  \begin{remark}[Problem with social engineering]
+    \begin{itemize}
+      \item These are attacks on higher levels.
+      \item E.g.\ an email or phone call.
+      \item Difficult to check algorithmically.
+    \end{itemize}
+  \end{remark}
+
+  \begin{example}
+    \begin{itemize}
+      \item Phone call to helpdesk from a \enquote{user} in need.
+      \item Stressful situation, willingness to help, \dots
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Solution?]
+    \begin{itemize}
+      \item Authenticated phone calls.
+      \item E.g.\ display caller ID clearly.
+      \item \enquote{My phone is out of battery, I borrowed a student's}.
+    \end{itemize}
+  \end{example}
+
+  \begin{solution}
+    \begin{itemize}
+      \item Educate and train users to spot these attempts.
+
+      \item Keep strong policies for recovering from authentication failures. 
+
+      \item Technological tools and good practices can support users.
+    \end{itemize}
+  \end{solution}
+\end{frame}
+
+% XXX Continue reworking material below
 
 \subsection{Guessing Passwords}
 
