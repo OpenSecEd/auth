@@ -430,36 +430,85 @@
 
 \begin{frame}
   \begin{itemize}
-    \item There are generally two approaches to guessing passwords.
+    \item Guessing passwords is like searching for a needle in a haystack.
 
-    \item The first one is exhaustive search (brute force), which is to test 
-      all possible combinations of valid characters.
+      \pause{}
 
-    \item The second one is educated search, here we use some more knowledge.
+    \item (Un)fortunately, the needle is placed by a human --- not uniformly 
+      randomly!
+    \item This makes guessing easier.
+    \item Human-chosen passwords will only occupy parts of the password space.
   \end{itemize}
 \end{frame}
 
 \begin{frame}
   \begin{itemize}
-    \item Possible educated search is using dictionaries, adapt to password 
-      policy, etc.
+    \item The effort is a spectrum.
 
-    \item Some more advanced techniques for guessing passwords have also been 
-      developed.
+    \item It ranges from brute-force exhaustive search \dots
 
-    \item E.g.\ one could take grammar into account, depending on the password 
-      type~\cite{Bonneau2012ghs,Bonneau2012lpo}.
+      \pause{}
+
+    \item \dots via \enquote{educated guessing} \dots
+
+      \pause{}
+
+    \item \dots to getting the password from the user directly.
   \end{itemize}
 \end{frame}
 
 \begin{frame}
+  \begin{example}[Basic guessing]
+    \begin{itemize}
+      \item Using dictionaries of words.
+      \item Adapt to guesses to password policy, if known.
+      \item \dots
+    \end{itemize}
+  \end{example}
+
+  \pause{}
+
+  \begin{example}[Improved guessing]
+    Take grammar into account, depending on the password 
+    type~\cite{Bonneau2012ghs,Bonneau2012lpo}.
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Learn from humans]
+    \begin{itemize}
+      \item Use machine learning~\cite{JohnTheRipper,OMEN,WeirPCFG}.
+      \item Train algorithm on leaked password databases.
+      \item Generate list of password-looking guesses.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{remark}
+    \begin{itemize}
+      \item This is relevant when the user has chosen a password.
+      \item In the majority of situations it's not.
+    \end{itemize}
+  \end{remark}
+
+  \pause{}
+
+  \begin{example}
+    \begin{itemize}
+      \item There are many devices with default passwords.
+      \item E.g.\ home routers, \dots
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
   \begin{itemize}
-    \item There are also some measures to be taken to counter password 
-      guessing.
+    \item Change default passwords, those are the obvious first guess.
 
-    \item First, change default passwords, those are the obvious first guess.
+      \pause{}
 
-    \item Increase the length of the passwords.
+    \item Increase the length of the passwords~\cite{Komanduri2011opa}.
 
     \item We could increase complexity, we know this is popular --- 
       but~\cite{Komanduri2011opa} shows it is worse for users than further 
@@ -469,15 +518,19 @@
 
 \begin{frame}
   \begin{itemize}
-    \item We can also generate passwords for users, although this might reduce 
-      security by use of post-it notes.
+    \item Generate passwords for users: this will likely reduce security by use 
+      of post-it notes.
 
-    \item We can also introduce password ageing, can be annoying with too short 
-      intervals -- and will reduce security once users introduce systems to 
-      remember their last changed password.
+      \pause{}
 
-    \item Finally we can remove online guessing by introducing limited login 
-      attempts, however at the cost of possible denial of service.
+    \item Password ageing: annoying with too short intervals.
+    \item Will reduce security once users introduce systems to remember their 
+      last changed password.
+
+      \pause{}
+
+    \item Remove online guessing by limited login attempts: at the cost of 
+      possible denial of service.
 
   \end{itemize}
 \end{frame}
