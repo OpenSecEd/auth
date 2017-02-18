@@ -503,36 +503,70 @@
 \end{frame}
 
 \begin{frame}
-  \begin{itemize}
-    \item Change default passwords, those are the obvious first guess.
+  \begin{remark}
+    \begin{itemize}
+      \item The problem of default passwords has increased recently.
+      \item Home routers, web cameras are open to attack.
+    \end{itemize}
+  \end{remark}
 
-      \pause{}
+  \pause{}
 
-    \item Increase the length of the passwords~\cite{Komanduri2011opa}.
-
-    \item We could increase complexity, we know this is popular --- 
-      but~\cite{Komanduri2011opa} shows it is worse for users than further 
-      increasing the length.
-  \end{itemize}
+  \begin{example}[Mirai botnet~\cite{MiraiAnalysis}]
+    \begin{itemize}
+      \item Botnet infecting primarily surveillance cameras.
+      \item Attempts default passwords and other vulnerabilities.
+      \item Managed the largest \ac{DDoS} attack hitherto.
+    \end{itemize}
+  \end{example}
 \end{frame}
 
 \begin{frame}
-  \begin{itemize}
-    \item Generate passwords for users: this will likely reduce security by use 
-      of post-it notes.
+  \begin{exercise}
+    \begin{itemize}
+      \item This is a problem when the authentication mechanism faces the 
+        Internet.
 
-      \pause{}
+      \item E.g.\ home routers where the admin interface only faces the local 
+        network should be fine.
 
-    \item Password ageing: annoying with too short intervals.
-    \item Will reduce security once users introduce systems to remember their 
-      last changed password.
+      \item (The same if we have a white list of addresses allowed access.)
 
-      \pause{}
+      \item What do you think?
+    \end{itemize}
+  \end{exercise}
+\end{frame}
 
-    \item Remove online guessing by limited login attempts: at the cost of 
-      possible denial of service.
+\begin{frame}
+  \begin{example}[Autogenerate passwords]
+    \begin{itemize}
+      \item Generate passwords for users.
+      \item This will likely reduce security by use of post-it notes.
+      \item Not a problem for a home router.
+    \end{itemize}
+  \end{example}
+\end{frame}
 
-  \end{itemize}
+\begin{frame}
+  \begin{example}[Password ageing]
+    \begin{itemize}
+      \item Let passwords age and expire.
+      \item Annoying with too short intervals.
+      \item Will reduce security once users introduce systems to remember their 
+        last changed password.
+      \item Just an expiration date for the generated one, infinite selected by
+        user.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Rate limiting]
+    \begin{itemize}
+      \item Remove online guessing by limited login attempts.
+      \item Introduces the possibility of denial of service.
+    \end{itemize}
+  \end{example}
 \end{frame}
 
 
