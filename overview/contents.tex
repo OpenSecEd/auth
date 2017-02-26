@@ -424,7 +424,8 @@
   \end{solution}
 \end{frame}
 
-% XXX Continue reworking material below
+
+\section[Securing]{Securing Authentication}
 
 \subsection{Guessing Passwords}
 
@@ -569,128 +570,213 @@
   \end{example}
 \end{frame}
 
-
-\section[Securing]{Securing Authentication}
-
 \subsection{The Password File}
 
 \begin{frame}
-  \begin{itemize}
-    \item Once we have data which can be used to authenticate users, we need to 
-      store this data somewhere for future authentication.
+  \begin{exercise}
+    \begin{itemize}
+      \item We now have data to authenticate users.
+      \item How do we store this data?
+      \item What problems do you see?
+    \end{itemize}
+  \end{exercise}
 
-    \item Traditionally, in the case of passwords, there has always been a 
-      password file (or database) containing all users' passwords.
+  \pause{}
 
-    \item Naturally we have to protect this data, otherwise if someone got hold 
-      of it he or she could impersonate any user in the system.
+  \begin{example}[Password-based authentication]
+    \begin{itemize}
+      \item Traditionally, there is a password file (or database).
+      \item This contains all users' passwords.
 
-  \end{itemize}
+        \pause{}
+
+      \item If someone copies this data, he or she could impersonate any user 
+        in the system.
+    \end{itemize}
+  \end{example}
 \end{frame}
 
 \begin{frame}
-  \begin{itemize}
-    \item There are of course different approaches to protect it.
+  \begin{solution}[Passwords]
+    \begin{itemize}
+      \item We want to compare user-entered and stored password.
+      \item We do an irreversible one-way transformation on both.
+      \item Then they are still comparable.
+      \item The preimage cannot be gained from storage.
+    \end{itemize}
+  \end{solution}
 
-    \item One way is to encrypt it.
+  \pause{}
 
-    \item Another is to let the operating system's or database's access control 
-      protect it.
-
-    \item A third way is to do both.
-
-  \end{itemize}
+  \begin{example}
+    \begin{itemize}
+      \item Cryptographic hash function \(h\colon (\Z_2)^*\to (\Z_2)^n\).
+      \item On registration, store \(h(p)\).
+      \item User authenticates with \(p'\), check if \(h(p') \stackrel{?}{=}  
+          h(p)\) equals what we stored.
+    \end{itemize}
+  \end{example}
 \end{frame}
 
 \begin{frame}
-  \begin{itemize}
-    \item To encrypt the file, we do not actually need to encrypt it.
+  \begin{remark}
+    \begin{itemize}
+      \item Consider guessing again.
+      \item The used password space is small.
+      \item We only need to evaluate a subset: \(h\colon 
+          (\Z_2)^{\color{red}{m}}\to (\Z_2)^n\).
+      \item With faster computers we can guess a lot.
+    \end{itemize}
+  \end{remark}
 
-    \item We could apply an irreversible transformation on all the passwords.
+  \pause{}
 
-    \item Using a one-way function, or cryptographic hash function, we can make 
-      the passwords unreadable but still verifiable.
-
-    \item Let \(h\) be a hash function and \(p\) a password, then we simply 
-      compute \(h(p)\) to store in our database.
-
-    \item When the user wants to authenticate with a password \(p^\prime\) we 
-      simply compute \(h(p^\prime)\) and compare to the stored \(h(p)\).
-
-  \end{itemize}
+  \begin{solution}
+    \begin{itemize}
+      \item Choose \(h\) to be slow to compute.
+      \item E.g.\ iterate it over itself 10\,000 times.
+      \item This will slow down guessing attacks.
+    \end{itemize}
+  \end{solution}
 \end{frame}
 
 \begin{frame}
-  \begin{itemize}
-    \item The function \(h\) is selected to be a very slow one-way function, 
-      maybe we iterate its application to the password (like 10\,000 to 
-      100\,000 times, not only 5).
+  \begin{remark}
+    \begin{itemize}
+      \item The password file structure reveals if two users have the same 
+        password.
+      \item Can guess the password for all users at once:
+        \begin{enumerate}
+          \item Make a guess, compute the hash.
+          \item Check if it matches \emph{any} user's password.
+        \end{enumerate}
+    \end{itemize}
+  \end{remark}
 
-    \item This way we can slow down guessing attacks should anyone ever come 
-      across our password database.
+  \pause{}
 
-    \item However, as our password file is currently structured, we can still 
-      see if two users have the same password -- they would have the same hash 
-      value.
-
-    \item This way we can guess the password for all users at once: we make 
-      a guess, check if it matches \emph{any} user's password.
-
-    \item To counter this we add a \emph{salt}, this is a small value (e.g.\ 
-      128 bits) selected randomly for each user.
-
-    \item This way all password hashes will be unique and the attack would have 
-      to be on a per-password basis.
-
-  \end{itemize}
+  \begin{solution}
+    \begin{itemize}
+      \item Add a \emph{salt}: a small random value (e.g.\ 128 bits) unique for 
+        each user.
+      \item Include this value in the computation of the password hash.
+      \item Now all hashes will be unique.
+    \end{itemize}
+  \end{solution}
 \end{frame}
 
 \begin{frame}
-  \begin{itemize}
-    \item bcrypt implements all this functionality.
-    \item It should also be available in most languages and libraries.
-  \end{itemize}
+  \begin{example}
+    \begin{itemize}
+      \item bcrypt~\cite{bcrypt} implements all this functionality.
+      \item It should also be available in most languages and libraries.
+    \end{itemize}
+  \end{example}
 \end{frame}
 
 \subsection{Alternative Approaches}
 
 \begin{frame}
-  \begin{itemize}
-    \item We mentioned in the beginning some alternatives to passwords, these 
-      were:
-      \begin{itemize}
-        \item who you are,
-        \item where you are,
-        \item what you do,
-        \item something you know, and
-        \item something you have.
-      \end{itemize}
+  \begin{example}[Something you \dots]
+    \begin{itemize}
+      \item know (passwords)
+      \item have (hardware tokens)
+      \item are (passive biometrics)
+      \item do (active biometrics)
+    \end{itemize}
+  \end{example}
 
-    \item Using two or more of these together gave us two- or multiple-factor 
-      authentication, this reduces the risk of false positives.
+  \pause{}
 
-  \end{itemize}
+  \begin{remark}
+    \begin{itemize}
+      \item Do you \emph{know} a private key or do you \emph{have} one?
+      \item A password you \emph{know}.
+      \item A private key in a hardware token you \emph{have}.
+      \item If the key is stored on your disk?
+    \end{itemize}
+  \end{remark}
 \end{frame}
 
 \begin{frame}
-  \begin{itemize}
-    \item ``Who you are'' is becoming more popular as a basis for 
-      authentication.
+  \begin{example}[Passive biometrics]
+    \begin{itemize}
+      \item Fingerprint
+      \item Irises
+      \item DNA
+    \end{itemize}
+  \end{example}
 
-    \item This covers biometrics like fingerprints or iris scans.
+  \pause{}
 
-    \item ``What you do'' is also a biometric, however, the focus of this one 
-      is on things you do, e.g.\ how you write your signature -- including the 
-      resulting signature, the writing speed, the pressure at different points, 
-      etc.
+  \begin{example}[Active biometrics]
+    \begin{itemize}
+      \item Typing speed
+      \item Cursor movement
+      \item Web surfing behaviour
+      \item Pressure points in signature
+    \end{itemize}
+  \end{example}
+\end{frame}
 
-    \item Finally, ``where you are'' is also becoming easier to apply with 
-      positioning systems in smartphones and IP addresses of computers.
+\begin{frame}
+  \begin{exercise}
+    \begin{itemize}
+      \item What about something you are (passive biometrics)?
+      \item When is that more than merely a password?
+    \end{itemize}
+  \end{exercise}
+\end{frame}
 
-    \item E.g.\ Google employs where you are if you have enabled two-factor 
-      authentication, then you will have too verify with your phone if your IP 
-      address changes.
-  \end{itemize}
+\begin{frame}
+  \begin{example}[Fingerprins for iPhones]
+    \begin{itemize}
+      \item The iPhone can trust its built-in fingerprint reader.
+      \item We know that we read an actual finger.
+      \item We have freshness.
+    \end{itemize}
+  \end{example}
+
+  \pause{}
+
+  \begin{example}[Fingerprints for web services]
+    \begin{itemize}
+      \item Fingerprint reader connected to laptop.
+      \item Browser scans and sends fingerprint to server.
+      \item Anyone could send that data, without the reader.
+      \item We lack freshness guarantees.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{remark}
+    \begin{itemize}
+      \item We need freshness.
+      \item We must store the fingerprint somewhere, to compare.
+      \item Someone can copy that data.
+      \item Without freshness they can use it --- as a password.
+    \end{itemize}
+  \end{remark}
+
+  \pause{}
+
+  \begin{remark}
+    \begin{itemize}
+      \item Similar for interactive biometrics.
+      \item Record and replay.
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\begin{frame}
+  \begin{exercise}
+    \begin{itemize}
+      \item How can we ensure freshness?
+      \item What data do we need to store for this?
+      \item How can we secure that data?
+    \end{itemize}
+  \end{exercise}
 \end{frame}
 
 \begin{frame}

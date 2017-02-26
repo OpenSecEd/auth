@@ -60,6 +60,16 @@
   \end{alertblock}
 }
 
+\ProvideDocumentEnvironment{question}{o}{%
+  \IfValueTF{#1}{%
+    \begin{alertblock}{Question: #1}
+  }{%
+    \begin{alertblock}{Question}
+  }
+}{%
+  \end{alertblock}
+}
+
 \title[Authentication]{%
   Identification and Authentication
 }
