@@ -237,7 +237,92 @@
 
 \section{Authenticating}
 
-\subsection{Time of Check to Time of Use}
+\subsection{User--machine authentication}
+
+\begin{frame}
+  \begin{example}[Identifiers]
+    \begin{itemize}
+      \item Username or User ID
+      \item The person who opened the account
+      \item Personal Identification Number (Swe.\ personnummer, Eng.\ Social 
+        Security Number)
+
+        \pause{}
+
+      \item Fingerprint
+      \item Iris scan
+      \item DNA sequence \dots
+    \end{itemize}
+  \end{example}
+
+  \pause{}
+
+  \begin{exercise}
+    Any other methods of user identification that you have encountered?
+  \end{exercise}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Methods for user authentication]
+    \begin{itemize}
+      \item Something you \emph{know}
+
+        \pause{}
+
+      \item Something you \emph{have}
+
+        \pause{}
+
+      \item \emph{Where} you are
+
+        \pause{}
+
+      \item \emph{Who} you are
+      \item What you \emph{do}
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\subsection{Multi-factor user-authentication}
+
+\begin{frame}
+  \begin{definition}[Multi-factor authentication]
+    \begin{itemize}
+      \item Combine two or more methods of authentication.
+    \end{itemize}
+  \end{definition}
+
+  \begin{example}[Methods for user authentication]
+    \begin{itemize}
+      \item Something you \emph{know}
+      \item Something you \emph{have}
+      \item \emph{Where} you are
+      \item \emph{Who} you are
+      \item What you \emph{do}
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Single-factor authentication]
+    \begin{description}
+      \item[Identification] Username or similar
+      \item[Authentication] Something you know, i.e.\ a password
+    \end{description}
+  \end{example}
+
+  \pause{}
+
+  \begin{example}[Multi-factor authentication]
+    \begin{description}
+      \item[Identification] Username or similar
+      \item[Authentication] Something you know together with something you 
+        have, e.g.\ password and mobile phone
+    \end{description}
+  \end{example}
+\end{frame}
+
+\subsection{Time of check, time of use}
 
 \begin{frame}
   \begin{exercise}
@@ -279,9 +364,17 @@
         compare with sudo(8).
     \end{itemize}
   \end{solution}
+
+  \pause{}
+
+  \begin{remark}
+    \begin{itemize}
+      \item What we actually need is \emph{continuous} authentication.
+    \end{itemize}
+  \end{remark}
 \end{frame}
 
-\subsection{Phishing, Spoofing, Social Engineering}
+\subsection{Machine--user authentication}
 
 \begin{frame}
   \begin{remark}
