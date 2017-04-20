@@ -19,93 +19,60 @@
 \subsection{Identification and Authentication}
 
 \begin{frame}
-  \begin{itemize}
-    \item Authentication is the process of verifying the identity claimed by 
-      some system entity.
+  \begin{definition}[Identifier]
+    \begin{itemize}
+      \item An identifier is a piece of data that uniquely identifies some 
+        entity.
+    \end{itemize}
+  \end{definition}
 
-      \pause{}
-
-      \begin{description}
-        \item[Identification] First you enter your username to \emph{identify} 
-          yourself.
-
-          \pause{}
-
-        \item[Authentication] Then you enter your password to 
-          \emph{authenticate} that you are truly you.
-      \end{description}
-
-  \end{itemize}
+  \begin{example}[Identifiers]
+    \begin{itemize}
+      \item An email address identifies a user uniquely in the email system.
+      \item A username identifies a user in some system.
+      \item A passport number uniquely identifies a passport issued by 
+        a country.
+    \end{itemize}
+  \end{example}
 \end{frame}
 
 \begin{frame}
-  \begin{example}[Methods for identification]
+  \begin{definition}[Authentication]
     \begin{itemize}
-      \item Username or User ID
-      \item The person who opened the account
-      \item Personal Identification Number (Swe.\ personnummer, Eng.\ Social 
-        Security Number)
-
-        \pause{}
-
-      \item Fingerprint
-      \item Iris scan
-      \item DNA sequence \dots
+      \item Some entity claims an identity: \enquote{identifier \(X\) 
+          identifies me}.
+      \item Authentication is about verification.
+      \item That entity must \emph{convince} us that its claim is true.
     \end{itemize}
-  \end{example}
+  \end{definition}
 
   \pause{}
 
-  \begin{exercise}
-    Any other methods of identification that you have encountered?
+  \begin{exercise}[How can we authenticate]
+    \begin{itemize}
+      \item the claim of an email address?
+      \item the claim of a username in some system?
+      \item the claim of a passport number?
+      \item the claim of a national identity in some country?
+    \end{itemize}
   \end{exercise}
 \end{frame}
 
 \begin{frame}
-  \begin{example}[Methods for authentication]
-    \begin{itemize}
-      \item Something you \emph{know}
-
-        \pause{}
-
-      \item Something you \emph{have}
-
-        \pause{}
-
-      \item \emph{Where} you are
-
-        \pause{}
-
-      \item \emph{Who} you are
-      \item What you \emph{do}
-    \end{itemize}
-  \end{example}
-\end{frame}
-
-\subsection{Multi-factor authentication}
-
-\begin{frame}
-  \begin{example}[Single-factor authentication]
+  \begin{example}[User authentication]
     \begin{description}
-      \item[Identification] Username or similar
-      \item[Authentication] Something you know, i.e.\ a password
+      \item[Identification] First you enter your username to \emph{identify} 
+        yourself.
+
+      \item[Authentication] Then you enter your password to \emph{authenticate} 
+        that you are truly you.
     \end{description}
   \end{example}
 
   \pause{}
 
-  \begin{example}[Multi-factor authentication]
-    \begin{description}
-      \item[Identification] Username or similar
-      \item[Authentication] Something you know together with something you 
-        have, e.g.\ password and mobile phone
-    \end{description}
-  \end{example}
-\end{frame}
-
-\begin{frame}
   \begin{exercise}
-    What other authentication methods have you encountered?
+    Why does this work?
   \end{exercise}
 \end{frame}
 
