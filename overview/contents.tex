@@ -638,6 +638,17 @@
   \end{example}
 \end{frame}
 
+\begin{frame}
+  \begin{remark}[Offline data]
+    \begin{itemize}
+      \item Consider data which is encrypted with a password.
+      \item You cannot change a password for data that is already stolen.
+      \item You cannot limit the number of attempts either.
+      \item You can just control the guessability of the password.
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
 \subsection{The Password File}
 
 \begin{frame}
@@ -648,9 +659,9 @@
       \item What problems do you see?
     \end{itemize}
   \end{exercise}
+\end{frame}
 
-  \pause{}
-
+\begin{frame}
   \begin{example}[Password-based authentication]
     \begin{itemize}
       \item Traditionally, there is a password file (or database).
@@ -734,6 +745,15 @@
 \end{frame}
 
 \begin{frame}
+  \begin{remark}
+    \begin{itemize}
+      \item The salt is not a secret, it's just unique.
+      \item It can be stored in plain text along with the password hash.
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\begin{frame}
   \begin{example}
     \begin{itemize}
       \item bcrypt~\cite{bcrypt} implements all this functionality.
@@ -797,11 +817,11 @@
 \end{frame}
 
 \begin{frame}
-  \begin{example}[Fingerprins for iPhones]
+  \begin{example}[Fingerprints for iPhones]
     \begin{itemize}
       \item The iPhone can trust its built-in fingerprint reader.
       \item We know that we read an actual finger.
-      \item We have freshness.
+      \item We know when we read it, so we have freshness.
     \end{itemize}
   \end{example}
 
@@ -848,46 +868,14 @@
 \end{frame}
 
 \begin{frame}
-  \begin{itemize}
-    \item You can also take this to the new level.
-
-      % XXX add ref to IEEE Security and Privacy article on web fingerprinting
-      % XXX and tracking
-    \item Some web sites use visitor fingerprinting techniques to identify 
-      users.
-
-    \item This can be used to detect if the real user is authenticating or not.
-
-    \item However, these fingerprinting mechanisms are typically used for other 
-      purposes, to track users' browsing habits to serve targeted ads to them.
-
-    \item EFF developed a tool to illustrate the privacy invasion of browser 
-      fingerprinting in~\cite{Eckersley2010hui}.
-      \begin{itemize}
-        \item You can test browser fingerprinting at URL 
-          \url{https://panopticlick.eff.org/}.
-      \end{itemize}
-
-  \end{itemize}
+  \begin{solution}
+    \begin{itemize}
+      \item Freshness is about challenge and response.
+      \item Password-based authentication: the same challenge all the time.
+      \item Improvement: random challenge, hard-to-guess response.
+    \end{itemize}
+  \end{solution}
 \end{frame}
-
-\begin{frame}
-  \begin{itemize}
-    \item A problem with all of these is the accuracy and failure rate of the 
-      technologies needed to sample the data used in authentication.
-
-    \item E.g.\ a fingerprint reader is prone to error due to greasy fingers, 
-      complex passwords can be typed incorrectly, etc.
-
-    \item And since it introduces another system in some cases, it also 
-      introduces trust issues for the user -- is this an authentic fingerprint 
-      reader, is it really the Google sign-in in this IFRAME, or is it one that 
-      will steal my credentials?
-
-  \end{itemize}
-\end{frame}
-
-% XXX include failure rates from Gollmann
 
 \subsection{Anonymous Credentials}
 
