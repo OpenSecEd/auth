@@ -1,3 +1,21 @@
+keyauth/asymmetric.eps
+keyauth/cert-overview.eps
+keyauth/dhkx-mitm.eps
+keyauth/dhkx.eps
+keyauth/federated.eps
+keyauth/idmgmt-arch.eps
+keyauth/kerberos-overview.eps
+keyauth/kerberos-ver4.eps
+keyauth/kerberosIV-detailed.eps
+keyauth/kerberosV-detailed.eps
+keyauth/keyauth.pdf
+keyauth/mac-hash.eps
+keyauth/pkix-arch.eps
+keyauth/sign-overview.eps
+keyauth/symmetric.eps
+keyauth/x509-format.eps
+keyauth/x509-hier.eps
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof

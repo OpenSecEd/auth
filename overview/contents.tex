@@ -19,93 +19,60 @@
 \subsection{Identification and Authentication}
 
 \begin{frame}
-  \begin{itemize}
-    \item Authentication is the process of verifying the identity claimed by 
-      some system entity.
+  \begin{definition}[Identifier]
+    \begin{itemize}
+      \item An identifier is a piece of data that uniquely identifies some 
+        entity.
+    \end{itemize}
+  \end{definition}
 
-      \pause{}
-
-      \begin{description}
-        \item[Identification] First you enter your username to \emph{identify} 
-          yourself.
-
-          \pause{}
-
-        \item[Authentication] Then you enter your password to 
-          \emph{authenticate} that you are truly you.
-      \end{description}
-
-  \end{itemize}
+  \begin{example}[Identifiers]
+    \begin{itemize}
+      \item An email address identifies a user uniquely in the email system.
+      \item A username identifies a user in some system.
+      \item A passport number uniquely identifies a passport issued by 
+        a country.
+    \end{itemize}
+  \end{example}
 \end{frame}
 
 \begin{frame}
-  \begin{example}[Methods for identification]
+  \begin{definition}[Authentication]
     \begin{itemize}
-      \item Username or User ID
-      \item The person who opened the account
-      \item Personal Identification Number (Swe.\ personnummer, Eng.\ Social 
-        Security Number)
-
-        \pause{}
-
-      \item Fingerprint
-      \item Iris scan
-      \item DNA sequence \dots
+      \item Some entity claims an identity: \enquote{identifier \(X\) 
+          identifies me}.
+      \item Authentication is about verification.
+      \item That entity must \emph{convince} us that its claim is true.
     \end{itemize}
-  \end{example}
+  \end{definition}
 
   \pause{}
 
-  \begin{exercise}
-    Any other methods of identification that you have encountered?
+  \begin{exercise}[How can we authenticate]
+    \begin{itemize}
+      \item the claim of an email address?
+      \item the claim of a username in some system?
+      \item the claim of a passport number?
+      \item the claim of a national identity in some country?
+    \end{itemize}
   \end{exercise}
 \end{frame}
 
 \begin{frame}
-  \begin{example}[Methods for authentication]
-    \begin{itemize}
-      \item Something you \emph{know}
-
-        \pause{}
-
-      \item Something you \emph{have}
-
-        \pause{}
-
-      \item \emph{Where} you are
-
-        \pause{}
-
-      \item \emph{Who} you are
-      \item What you \emph{do}
-    \end{itemize}
-  \end{example}
-\end{frame}
-
-\subsection{Multi-factor authentication}
-
-\begin{frame}
-  \begin{example}[Single-factor authentication]
+  \begin{example}[User authentication]
     \begin{description}
-      \item[Identification] Username or similar
-      \item[Authentication] Something you know, i.e.\ a password
+      \item[Identification] First you enter your username to \emph{identify} 
+        yourself.
+
+      \item[Authentication] Then you enter your password to \emph{authenticate} 
+        that you are truly you.
     \end{description}
   \end{example}
 
   \pause{}
 
-  \begin{example}[Multi-factor authentication]
-    \begin{description}
-      \item[Identification] Username or similar
-      \item[Authentication] Something you know together with something you 
-        have, e.g.\ password and mobile phone
-    \end{description}
-  \end{example}
-\end{frame}
-
-\begin{frame}
   \begin{exercise}
-    What other authentication methods have you encountered?
+    Why does this work?
   \end{exercise}
 \end{frame}
 
@@ -171,6 +138,14 @@
   \begin{example}[The university account]
     This is how your university account was set up.
   \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{exercise}
+    \begin{itemize}
+      \item How is Alice authenticated when she applies for an ID?
+    \end{itemize}
+  \end{exercise}
 \end{frame}
 
 \begin{frame}
@@ -262,7 +237,92 @@
 
 \section{Authenticating}
 
-\subsection{Time of Check to Time of Use}
+\subsection{User--machine authentication}
+
+\begin{frame}
+  \begin{example}[Identifiers]
+    \begin{itemize}
+      \item Username or User ID
+      \item The person who opened the account
+      \item Personal Identification Number (Swe.\ personnummer, Eng.\ Social 
+        Security Number)
+
+        \pause{}
+
+      \item Fingerprint
+      \item Iris scan
+      \item DNA sequence \dots
+    \end{itemize}
+  \end{example}
+
+  \pause{}
+
+  \begin{exercise}
+    Any other methods of user identification that you have encountered?
+  \end{exercise}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Methods for user authentication]
+    \begin{itemize}
+      \item Something you \emph{know}
+
+        \pause{}
+
+      \item Something you \emph{have}
+
+        \pause{}
+
+      \item \emph{Where} you are
+
+        \pause{}
+
+      \item \emph{Who} you are
+      \item What you \emph{do}
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\subsection{Multi-factor user-authentication}
+
+\begin{frame}
+  \begin{definition}[Multi-factor authentication]
+    \begin{itemize}
+      \item Combine two or more methods of authentication.
+    \end{itemize}
+  \end{definition}
+
+  \begin{example}[Methods for user authentication]
+    \begin{itemize}
+      \item Something you \emph{know}
+      \item Something you \emph{have}
+      \item \emph{Where} you are
+      \item \emph{Who} you are
+      \item What you \emph{do}
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Single-factor authentication]
+    \begin{description}
+      \item[Identification] Username or similar
+      \item[Authentication] Something you know, i.e.\ a password
+    \end{description}
+  \end{example}
+
+  \pause{}
+
+  \begin{example}[Multi-factor authentication]
+    \begin{description}
+      \item[Identification] Username or similar
+      \item[Authentication] Something you know together with something you 
+        have, e.g.\ password and mobile phone
+    \end{description}
+  \end{example}
+\end{frame}
+
+\subsection{Time of check, time of use}
 
 \begin{frame}
   \begin{exercise}
@@ -304,9 +364,17 @@
         compare with sudo(8).
     \end{itemize}
   \end{solution}
+
+  \pause{}
+
+  \begin{remark}
+    \begin{itemize}
+      \item What we actually need is \emph{continuous} authentication.
+    \end{itemize}
+  \end{remark}
 \end{frame}
 
-\subsection{Phishing, Spoofing, Social Engineering}
+\subsection{Machine--user authentication}
 
 \begin{frame}
   \begin{remark}
@@ -379,19 +447,9 @@
 \end{frame}
 
 \begin{frame}
-  \begin{remark}
-    \begin{itemize}
-      \item We authentication of the system to the user.
-      \item In some sense, it boils down to trust.
-    \end{itemize}
-  \end{remark}
-\end{frame}
-
-\begin{frame}
   \begin{remark}[Problem with social engineering]
     \begin{itemize}
-      \item These are attacks on higher levels.
-      \item E.g.\ an email or phone call.
+      \item These are attacks on higher levels, e.g.\ an email or phone call.
       \item Difficult to check algorithmically.
     \end{itemize}
   \end{remark}
@@ -402,9 +460,9 @@
       \item Stressful situation, willingness to help, \dots
     \end{itemize}
   \end{example}
-\end{frame}
 
-\begin{frame}
+  \pause{}
+  
   \begin{example}[Solution?]
     \begin{itemize}
       \item Authenticated phone calls.
@@ -412,7 +470,9 @@
       \item \enquote{My phone is out of battery, I borrowed a student's}.
     \end{itemize}
   \end{example}
+\end{frame}
 
+\begin{frame}
   \begin{solution}
     \begin{itemize}
       \item Educate and train users to spot these attempts.
@@ -570,6 +630,17 @@
   \end{example}
 \end{frame}
 
+\begin{frame}
+  \begin{remark}[Offline data]
+    \begin{itemize}
+      \item Consider data which is encrypted with a password.
+      \item You cannot change a password for data that is already stolen.
+      \item You cannot limit the number of attempts either.
+      \item You can just control the guessability of the password.
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
 \subsection{The Password File}
 
 \begin{frame}
@@ -580,9 +651,9 @@
       \item What problems do you see?
     \end{itemize}
   \end{exercise}
+\end{frame}
 
-  \pause{}
-
+\begin{frame}
   \begin{example}[Password-based authentication]
     \begin{itemize}
       \item Traditionally, there is a password file (or database).
@@ -666,6 +737,15 @@
 \end{frame}
 
 \begin{frame}
+  \begin{remark}
+    \begin{itemize}
+      \item The salt is not a secret, it's just unique.
+      \item It can be stored in plain text along with the password hash.
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\begin{frame}
   \begin{example}
     \begin{itemize}
       \item bcrypt~\cite{bcrypt} implements all this functionality.
@@ -729,11 +809,11 @@
 \end{frame}
 
 \begin{frame}
-  \begin{example}[Fingerprins for iPhones]
+  \begin{example}[Fingerprints for iPhones]
     \begin{itemize}
       \item The iPhone can trust its built-in fingerprint reader.
       \item We know that we read an actual finger.
-      \item We have freshness.
+      \item We know when we read it, so we have freshness.
     \end{itemize}
   \end{example}
 
@@ -780,46 +860,14 @@
 \end{frame}
 
 \begin{frame}
-  \begin{itemize}
-    \item You can also take this to the new level.
-
-      % XXX add ref to IEEE Security and Privacy article on web fingerprinting
-      % XXX and tracking
-    \item Some web sites use visitor fingerprinting techniques to identify 
-      users.
-
-    \item This can be used to detect if the real user is authenticating or not.
-
-    \item However, these fingerprinting mechanisms are typically used for other 
-      purposes, to track users' browsing habits to serve targeted ads to them.
-
-    \item EFF developed a tool to illustrate the privacy invasion of browser 
-      fingerprinting in~\cite{Eckersley2010hui}.
-      \begin{itemize}
-        \item You can test browser fingerprinting at URL 
-          \url{https://panopticlick.eff.org/}.
-      \end{itemize}
-
-  \end{itemize}
+  \begin{solution}
+    \begin{itemize}
+      \item Freshness is about challenge and response.
+      \item Password-based authentication: the same challenge all the time.
+      \item Improvement: random challenge, hard-to-guess response.
+    \end{itemize}
+  \end{solution}
 \end{frame}
-
-\begin{frame}
-  \begin{itemize}
-    \item A problem with all of these is the accuracy and failure rate of the 
-      technologies needed to sample the data used in authentication.
-
-    \item E.g.\ a fingerprint reader is prone to error due to greasy fingers, 
-      complex passwords can be typed incorrectly, etc.
-
-    \item And since it introduces another system in some cases, it also 
-      introduces trust issues for the user -- is this an authentic fingerprint 
-      reader, is it really the Google sign-in in this IFRAME, or is it one that 
-      will steal my credentials?
-
-  \end{itemize}
-\end{frame}
-
-% XXX include failure rates from Gollmann
 
 \subsection{Anonymous Credentials}
 
