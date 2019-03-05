@@ -1,0 +1,675 @@
+\mode*
+
+% Since this a solution template for a generic talk, very little can
+% be said about how it should be structured. However, the talk length
+% of between 15min and 45min and the theme suggest that you stick to
+% the following rules:  
+
+% - Exactly two or three sections (other than the summary).
+% - At *most* three subsections per section.
+% - Talk about 30s to 2min per frame. So there should be between about
+%   15 and 30 frames, all told.
+
+
+\section{User--machine authentication}
+
+\subsection{What's the problem?}
+
+\begin{frame}
+  \begin{example}[Identifiers]
+    \begin{itemize}
+      \item Username or User ID
+      \item The person who opened the account
+      \item Personal Identification Number (Swe.\ personnummer, Eng.\ Social 
+        Security Number)
+
+        \pause{}
+
+      \item Fingerprint
+      \item Iris scan
+      \item DNA sequence \dots
+    \end{itemize}
+  \end{example}
+
+  \pause{}
+
+  \begin{exercise}
+    Any other methods of user identification that you have encountered?
+  \end{exercise}
+\end{frame}
+
+\subsection{Some approaches}
+
+\begin{frame}
+  \begin{example}[Methods for user authentication]
+    \begin{itemize}
+      \item Something you \emph{know}
+
+        \pause{}
+
+      \item Something you \emph{have}
+
+        \pause{}
+
+      \item \emph{Where} you are
+
+        \pause{}
+
+      \item \emph{Who} you are
+      \item What you \emph{do}
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\subsection{Multi-factor user-authentication}
+
+\begin{frame}
+  \begin{definition}[Multi-factor authentication]
+    \begin{itemize}
+      \item Combine two or more methods of authentication.
+    \end{itemize}
+  \end{definition}
+
+  \begin{example}[Methods for user authentication]
+    \begin{itemize}
+      \item Something you \emph{know}
+      \item Something you \emph{have}
+      \item \emph{Where} you are
+      \item \emph{Who} you are
+      \item What you \emph{do}
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Single-factor authentication]
+    \begin{description}
+      \item[Identification] Username or similar
+      \item[Authentication] Something you know, i.e.\ a password
+    \end{description}
+  \end{example}
+
+  \pause{}
+
+  \begin{example}[Multi-factor authentication]
+    \begin{description}
+      \item[Identification] Username or similar
+      \item[Authentication] Something you know together with something you 
+        have, e.g.\ password and mobile phone
+    \end{description}
+  \end{example}
+\end{frame}
+
+\subsection{Time of check, time of use}
+
+\begin{frame}
+  \begin{exercise}
+    \begin{itemize}
+      \item Whenever we authenticate a user, we do this for a purpose.
+
+      \item When does this authentication take place in relation to when we make 
+        use of it?
+    \end{itemize}
+  \end{exercise}
+\end{frame}
+
+\begin{frame}
+  \begin{example}
+    \begin{itemize}
+      \item Usually we authenticate a user in the beginning of a session, e.g.\ 
+        at login.
+
+      \item Equally often we assume the user is authenticated during the entire 
+        session, even when fetching coffee, going by the printer -- or even when 
+        out to lunch.
+
+      \item Who knows what happens when the user is away from the computer, one 
+        thing is for sure: the computer will not know the difference!
+
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{solution}
+    \begin{itemize}
+      \item This problem can be solved with \emph{repeated authentication}.
+
+      \item We could lock our system, either manually or by time-out.
+
+      \item We could also authenticate anew when we need to do something 
+        requiring more privileges, and if it has been a while since last time -- 
+        compare with sudo(8).
+    \end{itemize}
+  \end{solution}
+
+  \pause{}
+
+  \begin{remark}
+    \begin{itemize}
+      \item What we actually need is \emph{continuous} authentication.
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\section[Securing]{Securing Authentication}
+
+\subsection{Guessing Passwords}
+
+\begin{frame}
+  \begin{itemize}
+    \item Guessing passwords is like searching for a needle in a haystack.
+
+      \pause{}
+
+    \item (Un)fortunately, the needle is placed by a human --- not uniformly 
+      randomly!
+    \item This makes guessing easier.
+    \item Human-chosen passwords will only occupy parts of the password space.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \begin{itemize}
+    \item The effort is a spectrum.
+
+    \item It ranges from brute-force exhaustive search \dots
+
+      \pause{}
+
+    \item \dots via \enquote{educated guessing} \dots
+
+      \pause{}
+
+    \item \dots to getting the password from the user directly.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Basic guessing]
+    \begin{itemize}
+      \item Using dictionaries of words.
+      \item Adapt to guesses to password policy, if known.
+      \item \dots
+    \end{itemize}
+  \end{example}
+
+  \pause{}
+
+  \begin{example}[Improved guessing]
+    Take grammar into account, depending on the password 
+    type~\cite{Bonneau2012ghs,Bonneau2012lpo}.
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Learn from humans]
+    \begin{itemize}
+      \item Use machine learning~\cite{JohnTheRipper,OMEN,WeirPCFG}.
+      \item Train algorithm on leaked password databases.
+      \item Generate list of password-looking guesses.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{remark}
+    \begin{itemize}
+      \item This is relevant when the user has chosen a password.
+      \item In the majority of situations it's not.
+    \end{itemize}
+  \end{remark}
+
+  \pause{}
+
+  \begin{example}
+    \begin{itemize}
+      \item There are many devices with default passwords.
+      \item E.g.\ home routers, \dots
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{remark}
+    \begin{itemize}
+      \item The problem of default passwords has increased recently.
+      \item Home routers, web cameras are open to attack.
+    \end{itemize}
+  \end{remark}
+
+  \pause{}
+
+  \begin{example}[Mirai botnet~\cite{MiraiAnalysis}]
+    \begin{itemize}
+      \item Botnet infecting primarily surveillance cameras.
+      \item Attempts default passwords and other vulnerabilities.
+      \item Managed the largest \ac{DDoS} attack hitherto.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{exercise}
+    \begin{itemize}
+      \item This is a problem when the authentication mechanism faces the 
+        Internet.
+
+      \item E.g.\ home routers where the admin interface only faces the local 
+        network should be fine.
+
+      \item (The same if we have a white list of addresses allowed access.)
+
+      \item What do you think?
+    \end{itemize}
+  \end{exercise}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Autogenerate passwords]
+    \begin{itemize}
+      \item Generate passwords for users.
+      \item This will likely reduce security by use of post-it notes.
+      \item Not a problem for a home router.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Password ageing]
+    \begin{itemize}
+      \item Let passwords age and expire.
+      \item Annoying with too short intervals.
+      \item Will reduce security once users introduce systems to remember their 
+        last changed password.
+      \item Just an expiration date for the generated one, infinite selected by
+        user.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Rate limiting]
+    \begin{itemize}
+      \item Remove online guessing by limited login attempts.
+      \item Introduces the possibility of denial of service.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{remark}[Offline data]
+    \begin{itemize}
+      \item Consider data which is encrypted with a password.
+      \item You cannot change a password for data that is already stolen.
+      \item You cannot limit the number of attempts either.
+      \item You can just control the guessability of the password.
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\subsection{The Password File}
+
+\begin{frame}
+  \begin{exercise}
+    \begin{itemize}
+      \item We now have data to authenticate users.
+      \item How do we store this data?
+      \item What problems do you see?
+    \end{itemize}
+  \end{exercise}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Password-based authentication]
+    \begin{itemize}
+      \item Traditionally, there is a password file (or database).
+      \item This contains all users' passwords.
+
+        \pause{}
+
+      \item If someone copies this data, he or she could impersonate any user 
+        in the system.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{solution}[Passwords]
+    \begin{itemize}
+      \item We want to compare user-entered and stored password.
+      \item We do an irreversible one-way transformation on both.
+      \item Then they are still comparable.
+      \item The preimage cannot be gained from storage.
+    \end{itemize}
+  \end{solution}
+
+  \pause{}
+
+  \begin{example}
+    \begin{itemize}
+      \item Cryptographic hash function \(h\colon (\Z_2)^*\to (\Z_2)^n\).
+      \item On registration, store \(h(p)\).
+      \item User authenticates with \(p'\), check if \(h(p') \stackrel{?}{=}  
+          h(p)\) equals what we stored.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{remark}
+    \begin{itemize}
+      \item Consider guessing again.
+      \item The used password space is small.
+      \item We only need to evaluate a subset: \(h\colon 
+          (\Z_2)^{\color{red}{m}}\to (\Z_2)^n\).
+      \item With faster computers we can guess a lot.
+    \end{itemize}
+  \end{remark}
+
+  \pause{}
+
+  \begin{solution}
+    \begin{itemize}
+      \item Choose \(h\) to be slow to compute.
+      \item E.g.\ iterate it over itself 10\,000 times.
+      \item This will slow down guessing attacks.
+    \end{itemize}
+  \end{solution}
+\end{frame}
+
+\begin{frame}
+  \begin{remark}
+    \begin{itemize}
+      \item The password file structure reveals if two users have the same 
+        password.
+      \item Can guess the password for all users at once:
+        \begin{enumerate}
+          \item Make a guess, compute the hash.
+          \item Check if it matches \emph{any} user's password.
+        \end{enumerate}
+    \end{itemize}
+  \end{remark}
+
+  \pause{}
+
+  \begin{solution}
+    \begin{itemize}
+      \item Add a \emph{salt}: a small random value (e.g.\ 128 bits) unique for 
+        each user.
+      \item Include this value in the computation of the password hash.
+      \item Now all hashes will be unique.
+    \end{itemize}
+  \end{solution}
+\end{frame}
+
+\begin{frame}
+  \begin{remark}
+    \begin{itemize}
+      \item The salt is not a secret, it's just unique.
+      \item It can be stored in plain text along with the password hash.
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\begin{frame}
+  \begin{example}
+    \begin{itemize}
+      \item bcrypt~\cite{bcrypt} implements all this functionality.
+      \item It should also be available in most languages and libraries.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\subsection{Alternative Approaches}
+
+\begin{frame}
+  \begin{example}[Something you \dots]
+    \begin{itemize}
+      \item know (passwords)
+      \item have (hardware tokens)
+      \item are (passive biometrics)
+      \item do (active biometrics)
+    \end{itemize}
+  \end{example}
+
+  \pause{}
+
+  \begin{remark}
+    \begin{itemize}
+      \item Do you \emph{know} a private key or do you \emph{have} one?
+      \item A password you \emph{know}.
+      \item A private key in a hardware token you \emph{have}.
+      \item If the key is stored on your disk?
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Passive biometrics]
+    \begin{itemize}
+      \item Fingerprint
+      \item Irises
+      \item DNA
+    \end{itemize}
+  \end{example}
+
+  \pause{}
+
+  \begin{example}[Active biometrics]
+    \begin{itemize}
+      \item Typing speed
+      \item Cursor movement
+      \item Web surfing behaviour
+      \item Pressure points in signature
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{exercise}
+    \begin{itemize}
+      \item What about something you are (passive biometrics)?
+      \item When is that more than merely a password?
+    \end{itemize}
+  \end{exercise}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Fingerprints for iPhones]
+    \begin{itemize}
+      \item The iPhone can trust its built-in fingerprint reader.
+      \item We know that we read an actual finger.
+      \item We know when we read it, so we have freshness.
+    \end{itemize}
+  \end{example}
+
+  \pause{}
+
+  \begin{example}[Fingerprints for web services]
+    \begin{itemize}
+      \item Fingerprint reader connected to laptop.
+      \item Browser scans and sends fingerprint to server.
+      \item Anyone could send that data, without the reader.
+      \item We lack freshness guarantees.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{remark}
+    \begin{itemize}
+      \item We need freshness.
+      \item We must store the fingerprint somewhere, to compare.
+      \item Someone can copy that data.
+      \item Without freshness they can use it --- as a password.
+    \end{itemize}
+  \end{remark}
+
+  \pause{}
+
+  \begin{remark}
+    \begin{itemize}
+      \item Similar for interactive biometrics.
+      \item Record and replay.
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\begin{frame}
+  \begin{exercise}
+    \begin{itemize}
+      \item How can we ensure freshness?
+      \item What data do we need to store for this?
+      \item How can we secure that data?
+    \end{itemize}
+  \end{exercise}
+\end{frame}
+
+\begin{frame}
+  \begin{solution}
+    \begin{itemize}
+      \item Freshness is about challenge and response.
+      \item Password-based authentication: the same challenge all the time.
+      \item Improvement: random challenge, hard-to-guess response.
+    \end{itemize}
+  \end{solution}
+\end{frame}
+
+\subsection{Anonymous Credentials}
+
+\begin{frame}
+  \begin{example}[Age limits]
+    \begin{itemize}
+      \item Bob wants to go see a film in cinema.
+      \item Bob looks very young so Alice who works there wants to have proof 
+        of his age.
+
+        \pause{}
+
+      \item Show physical ID, reveals name, exact date of birth, \dots
+    \end{itemize}
+  \end{example}
+
+  \pause{}
+
+  \begin{exercise}
+    \begin{itemize}
+      \item That's a bit overkill, right?
+      \item What does Alice actually need to know?
+      \item In what direction must we move to achieve that?
+    \end{itemize}
+  \end{exercise}
+\end{frame}
+
+\begin{frame}
+  \begin{block}{What Alice needs?}
+    She must be convinced that Bob is older than 15.
+  \end{block}
+
+  \pause{}
+
+  \begin{alertblock}{How can she learn that?}
+    \begin{enumerate}
+      \item She has known Bob since he was born, so she knows.
+
+        \pause{}
+
+      \item She can ask someone \emph{she trusts} who knows Bob is older than 
+        15.
+    \end{enumerate}
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}
+  \begin{alertblock}{But how can she do that?}
+    \begin{enumerate}
+      \item The trusted person who knows Bob is with Alice.
+
+        \pause{}
+
+      \item Alice can send a picture to the other person who verifies.
+        \begin{itemize}
+          \item This requires an \emph{authenticated} channel.
+        \end{itemize}
+
+        \pause{}
+
+      \item The trusted person made a certificate for Bob showing that he's 
+        older than 15.
+        \begin{itemize}
+          \item Alice must be able to \emph{verify} the certificate.
+          \item Bob must bring this certificate with himself everywhere.
+        \end{itemize}
+
+    \end{enumerate}
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}
+  \begin{alertblock}{Alice interacts with the trusted person}
+    \begin{itemize}
+      \item Gaah, but Bob doesn't want the trusted person (his parents) to know 
+        he's at the cinema right now!
+      \item It's a small cinema so they'll know which film he sees if they 
+        learn when he's there.
+    \end{itemize}
+  \end{alertblock}
+
+  \pause{}
+
+  \begin{alertblock}{Alice reads and verifies the certificate}
+    \begin{itemize}
+      \item Phew, she accepted the note from his parents.
+      \item But now Alice learned all those embarrassing things in 
+        there.
+        \begin{itemize}
+          \item And Bob who has a crush on Alice \dots
+        \end{itemize}
+    \end{itemize}
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}
+  \begin{block}{The idea}
+    \begin{itemize}
+      \item What if Bob could convince Alice
+        \begin{itemize}
+          \item that he has a certificate saying he's older than 15,
+          \item and is signed by someone Alice trusts.
+        \end{itemize}
+      \item Wouldn't that be awesome?
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Anonymous 
+    Credentials\footfullcite{ElectronicIdentitiesNeedPrivateCredentials}]
+    \begin{itemize}
+      \item Makes heavy use of zero-knowledge proofs of knowledge.
+      \item Can prove equalities, inequalities, knowledge, ownership, \dots
+      \item Implementations and approaches:
+        \begin{description}
+          \item[Identity Mixer]
+            \url{https://www.research.ibm.com/labs/zurich/idemix/}
+          \item[U-Prove]
+            \url{http://research.microsoft.com/en-us/projects/u-prove/}
+          \item[AnonPass]
+            \url{https://eprint.iacr.org/2013/317}
+          \item[IRMA]
+            \url{https://www.irmacard.org/irma/}
+        \end{description}
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[allowframebreaks]
+	\small
+  \printbibliography{}
+\end{frame}
+
