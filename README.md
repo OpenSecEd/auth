@@ -23,6 +23,8 @@ The suggested progression of the contents is as follows:
 
  - `intro`
  - `bootstrapping`
+ - `user-machine`
+ - `machine-user`
 
 
 File Structure and Building
