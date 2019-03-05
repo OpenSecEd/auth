@@ -1,10 +1,10 @@
 .PHONY: all
-all: overview.pdf
+all: machine-user.pdf
 
-SRC+=		overview.tex abstract.tex overview.bib bibsp.sty
+SRC+=		machine-user.tex abstract.tex machine-user.bib bibsp.sty
 SRC+=		preamble.tex contents.tex
 
-overview.pdf: ${SRC}
+machine-user.pdf: ${SRC}
 
 authorization.png:
 	wget -O $@ http://imgs.xkcd.com/comics/authorization.png
@@ -12,7 +12,7 @@ authorization.png:
 
 .PHONY: clean
 clean:
-	${RM} overview.pdf
+	${RM} machine-user.pdf
 
 .PHONY: distclean
 distclean:
