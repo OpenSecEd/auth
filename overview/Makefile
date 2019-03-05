@@ -10,8 +10,12 @@ authorization.png:
 	wget -O $@ http://imgs.xkcd.com/comics/authorization.png
 
 
-.PHONY: clean-depends
-clean-depends:
+.PHONY: clean
+clean:
+	${RM} overview.pdf
+
+.PHONY: distclean
+distclean:
 	${RM} authorization.png
 
 
