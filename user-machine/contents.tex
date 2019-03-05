@@ -348,7 +348,7 @@
 
   \begin{example}
     \begin{itemize}
-      \item Cryptographic hash function \(h\colon (\Z_2)^*\to (\Z_2)^n\).
+      \item Cryptographic hash function \(h\colon \bin^*\to \bin^n\).
       \item On registration, store \(h(p)\).
       \item User authenticates with \(p'\), check if \(h(p') \stackrel{?}{=}  
           h(p)\) equals what we stored.
@@ -362,7 +362,7 @@
       \item Consider guessing again.
       \item The used password space is small.
       \item We only need to evaluate a subset: \(h\colon 
-          (\Z_2)^{\color{red}{m}}\to (\Z_2)^n\).
+          \bin^{\color{red}{m}}\to \bin^n\).
       \item With faster computers we can guess a lot.
     \end{itemize}
   \end{remark}
