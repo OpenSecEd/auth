@@ -16,6 +16,15 @@ maintainer is [Daniel Bosk][Maintainer].  The latest release can be found under
 [Releases]: https://github.com/OpenSecEd/appliedcrypto/releases
 
 
+Progression
+-------------------------------------------------------------------------------
+
+The suggested progression of the contents is as follows:
+
+ - `intro`
+ - `bootstrapping`
+
+
 File Structure and Building
 -------------------------------------------------------------------------------
 
