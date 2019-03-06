@@ -100,58 +100,6 @@
   \end{example}
 \end{frame}
 
-\subsection{Time of check, time of use}
-
-\begin{frame}
-  \begin{exercise}
-    \begin{itemize}
-      \item Whenever we authenticate a user, we do this for a purpose.
-
-      \item When does this authentication take place in relation to when we make 
-        use of it?
-    \end{itemize}
-  \end{exercise}
-\end{frame}
-
-\begin{frame}
-  \begin{example}
-    \begin{itemize}
-      \item Usually we authenticate a user in the beginning of a session, e.g.\ 
-        at login.
-
-      \item Equally often we assume the user is authenticated during the entire 
-        session, even when fetching coffee, going by the printer -- or even when 
-        out to lunch.
-
-      \item Who knows what happens when the user is away from the computer, one 
-        thing is for sure: the computer will not know the difference!
-
-    \end{itemize}
-  \end{example}
-\end{frame}
-
-\begin{frame}
-  \begin{solution}
-    \begin{itemize}
-      \item This problem can be solved with \emph{repeated authentication}.
-
-      \item We could lock our system, either manually or by time-out.
-
-      \item We could also authenticate anew when we need to do something 
-        requiring more privileges, and if it has been a while since last time -- 
-        compare with sudo(8).
-    \end{itemize}
-  \end{solution}
-
-  \pause{}
-
-  \begin{remark}
-    \begin{itemize}
-      \item What we actually need is \emph{continuous} authentication.
-    \end{itemize}
-  \end{remark}
-\end{frame}
-
 \section[Securing]{Securing Authentication}
 
 \subsection{Guessing Passwords}

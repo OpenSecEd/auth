@@ -11,9 +11,9 @@
 %   15 and 30 frames, all told.
 
 
-\section{Introduction}
+\section[Intro authentication]{Introduction to authentication}
 
-\subsection{Identification and Authentication}
+\subsection{Identification and authentication}
 
 \begin{frame}
   \begin{definition}[Identifier]
@@ -46,12 +46,12 @@
   \pause{}
 
   \begin{exercise}[How can we authenticate \dots]
-    \begin{itemize}
-      \item \dots the claim of an email address?
-      \item \dots the claim of a username in some system?
-      \item \dots the claim of a passport number?
-      \item \dots the claim of a national identity in some country?
-    \end{itemize}
+    \begin{enumerate}
+      \item the claim of an email address?
+      \item the claim of a username in some system?
+      \item the claim of a passport number?
+      \item the claim of a national identity in some country?
+    \end{enumerate}
   \end{exercise}
 \end{frame}
 
@@ -71,6 +71,134 @@
   \begin{exercise}
     Why does this work?
   \end{exercise}
+\end{frame}
+
+\subsection{Other attributes}
+
+\begin{frame}
+  \begin{example}
+    \begin{itemize}
+      \item Identity is simply an attribute.
+      \item Age is another attribute.
+      \item \enquote{Authorized to read document X} is also an attribute.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{exercise}
+    \begin{itemize}
+      \item How do you authenticate a claim about age?
+    \end{itemize}
+  \end{exercise}
+\end{frame}
+
+\begin{frame}
+  \begin{itemize}
+    \item Some attributes we can verify ourselves.
+    \item Some attributes we rely on someone else (\ie trust).
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Verify ourselves]
+    \begin{itemize}
+      \item I sign a note saying \enquote{Pay 10 SEK for this note}.
+      \item I give you this authentication token if I owe you 10 SEK.
+      \item I can verify the authenticity of the note when you claim the money.
+    \end{itemize}
+  \end{example}
+
+  \begin{example}[Trust someone else]
+    \begin{itemize}
+      \item I ask your age.
+      \item You show me your ID card.
+      \item I trust the card issuer and read your birthday.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{remark}
+    \begin{itemize}
+      \item Both methods use authentication tokens.
+      \item Security depends on forgeability of those.
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\subsection{Time of check, time of use}
+
+\begin{frame}
+  \begin{remark}
+    \begin{itemize}
+      \item Whenever we authenticate a user, we do this for a purpose.
+
+      \item When does this authentication take place in relation to when we make 
+        use of it?
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Bank office]
+    \begin{itemize}
+      \item Customer shows ID to clerk, clerk verifies account owner 
+        (authentication).
+      \item Clerk helps the customer.
+      \item Customer leaves.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Personal computers]
+    \begin{itemize}
+      \item User starts the computer in the morning.
+      \item User logs in (authentication step).
+      \item User goes for coffee.
+      \item User comes back.
+      \item User goes to lunch.
+      \item User comes back.
+      \item \dots
+      \item User turns the computer off.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{exercise}
+    \begin{itemize}
+      \item Why is there a problem with the second example (personal computer), 
+        but not the first (bank office)?
+    \end{itemize}
+  \end{exercise}
+\end{frame}
+
+\begin{frame}
+  \begin{remark}
+    \begin{itemize}
+      \item The key difference is that the first (bank) has \enquote{continuous 
+          authentication}, the clerk notices if the customer changes.
+
+      \item We need \emph{continuous} authentication for the computer too.
+    \end{itemize}
+  \end{remark}
+
+  \pause
+
+  \begin{solution}
+    \begin{itemize}
+      \item We can approximate that with \emph{repeated authentication}.
+
+      \item We could lock our system, either manually or by time-out.
+
+      \item We could also authenticate anew when we need to do something 
+        requiring more privileges, and if it has been a while since last time.
+
+      \item The computer could monitor the user's behaviour.
+    \end{itemize}
+  \end{solution}
 \end{frame}
 
 
