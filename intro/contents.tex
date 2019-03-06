@@ -81,6 +81,7 @@
       \item Identity is simply an attribute.
       \item Age is another attribute.
       \item \enquote{Authorized to read document X} is also an attribute.
+      \item \enquote{Is an administrator} is an attribute too.
     \end{itemize}
   \end{example}
 \end{frame}
@@ -93,10 +94,12 @@
   \end{exercise}
 \end{frame}
 
+\subsection{Authenticating}
+
 \begin{frame}
   \begin{itemize}
     \item Some attributes we can verify ourselves.
-    \item Some attributes we rely on someone else (\ie trust).
+    \item For other attributes we rely on someone else (\ie trust).
   \end{itemize}
 \end{frame}
 
@@ -108,6 +111,8 @@
       \item I can verify the authenticity of the note when you claim the money.
     \end{itemize}
   \end{example}
+
+  \pause
 
   \begin{example}[Trust someone else]
     \begin{itemize}
@@ -121,7 +126,7 @@
 \begin{frame}
   \begin{remark}
     \begin{itemize}
-      \item Both methods use authentication tokens.
+      \item Both methods use \enquote{authentication tokens}.
       \item Security depends on forgeability of those.
     \end{itemize}
   \end{remark}
@@ -181,6 +186,7 @@
       \item The key difference is that the first (bank) has \enquote{continuous 
           authentication}, the clerk notices if the customer changes.
 
+      \item The computer doesn't see the difference who's at the keyboard.
       \item We need continuous authentication for the computer too.
     \end{itemize}
   \end{remark}
@@ -190,8 +196,6 @@
   \begin{solution}
     \begin{itemize}
       \item We can approximate that with \emph{repeated authentication}.
-
-      \item We could lock our system, either manually or by time-out.
 
       \item We could also authenticate anew when we need to do something 
         requiring more privileges, and if it has been a while since last time.
