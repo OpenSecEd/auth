@@ -16,7 +16,7 @@
 \subsection{What is bootstrapping?}
 
 \begin{frame}
-  \begin{block}{Bootstrapping: A hen-and-egg problem}
+  \begin{block}{Bootstrapping: A chicken-and-egg problem}
     \begin{itemize}
       \item Alice is not registered in our authentication system.
       \item We want to register her as a user in our system.
@@ -24,7 +24,8 @@
         \pause{}
 
       \item How do we know Alice is actually Alice?
-      \item Since she's not registered we cannot authenticate her.
+      \item Since she's not registered, we don't have anything to authenticate 
+        her.
     \end{itemize}
   \end{block}
 
@@ -46,10 +47,18 @@
     \end{itemize}
   \end{solution}
 
-  \pause{}
+  \pause
+
+  \begin{remark}
+    \begin{itemize}
+      \item The attribute here is account ownership.
+    \end{itemize}
+  \end{remark}
 
   \begin{example}
-    This is the solution used by most web services.
+    \begin{itemize}
+      \item This is the solution used by most web services.
+    \end{itemize}
   \end{example}
 \end{frame}
 
@@ -67,11 +76,15 @@
     \end{itemize}
   \end{solution}
 
-  \pause{}
+  \pause
 
-  \begin{example}[The university account]
-    This is how your university account was set up.
-  \end{example}
+  \begin{remark}
+    \begin{itemize}
+      \item The attribute here is identity.
+      \item ID checks trust in the issuer.
+      \item Sending via mail trusts the mail system.
+    \end{itemize}
+  \end{remark}
 \end{frame}
 
 \begin{frame}
@@ -85,85 +98,92 @@
 \begin{frame}
   \begin{example}[Signal, WhatsApp, \dots]
     \begin{itemize}
-      \item The identity is a (mobile) phone number.
+      \item Relies on ownership of (mobile) phone number.
       \item Send a text message with a code.
     \end{itemize}
   \end{example}
 
-  \pause{}
+  \pause
 
   \begin{remark}
     \begin{itemize}
-      \item Phone provider can impersonate.
+      \item Assumes trustworthy phone infrastructure and operator.
+      \item Phone operator can impersonate.
       \item Government can impersonate (forcing phone provider).
     \end{itemize}
   \end{remark}
 \end{frame}
 
-\subsection{Problems with bootstrapping}
+\subsection{Problems and recovery}
 
 \begin{frame}
-  \begin{enumerate}
-    \item Attacker \emph{intercepts} a password on account creation.
-      \begin{itemize}
-        \item User starts bootstrapping.
-        \item Password is sent to user.
-        \item Attacker grabs password.
-      \end{itemize}
+  \begin{remark}
+    \begin{itemize}
+      \item How to recover from failure?
+    \end{itemize}
+  \end{remark}
 
-      \pause{}
+  \begin{example}
+    \begin{itemize}
+      \item You sign up for a Google account.
+      \item You forget your password \dots
+    \end{itemize}
+  \end{example}
 
-    \item Attacker \emph{impersonates} the legitimate user.
-      \begin{itemize}
-        \item Attacker starts bootstrapping.
-        \item User remains unaware.
-        \item Service cannot distinguish attacker and user.
-      \end{itemize}
-  \end{enumerate}
+  \begin{example}
+    \begin{itemize}
+      \item You sign up for a Facebook account.
+      \item Someone guesses your password and takes over your account.
+    \end{itemize}
+  \end{example}
 \end{frame}
 
 \begin{frame}
   \begin{itemize}
-    \item It can be costly to manage.
+    \item Sometimes this is a continuous process.
 
-    \item Sometimes it is a continuous process, if the same bootstrapping 
-      procedure is also used for \emph{recovery from failure}.
+    \item The same bootstrapping procedure can sometimes also be used for 
+      \emph{recovery from failure}.
 
     \item Make sure the system can handle forgotten, lost or aged 
       authentication means.
-
   \end{itemize}
 \end{frame}
 
-\subsection{Single Sign-On}
+\subsection{Give the problem to someone else}
 
 \begin{frame}
-  \begin{itemize}
-    \item We could let someone else who has solved the problem already do the 
-      authentication for us.
+  \begin{idea}
+    \begin{itemize}
+      \item We could let someone who has solved the problem already do the 
+        authentication for us.
+    \end{itemize}
+  \end{idea}
 
-    \item This way the user only needs one username and password, and he or she 
-      only needs to sign in once.
+  \pause
 
-    \item However, this makes the SSO provider a very attractive target.
+  \begin{remark}
+    \begin{itemize}
+      \item This make it easier for the user.
 
-    \item And they are forced to solve our problem anyway.
+      \item This makes the provider a very attractive target.
 
-    \item The problem is, now we need to trust them to do it properly \dots
-  \end{itemize}
+      \item We must trust them to do it properly \dots
+    \end{itemize}
+  \end{remark}
 \end{frame}
 
 \begin{frame}
   \begin{example}[We don't care who Alice is]
-    We can use Google, Facebook etc.
+    We can use Google, Facebook \etc.
   \end{example}
 
   \begin{example}[We care who Alice is]
-    We can use e.g.\ BankID.
+    We can use \eg BankID.
   \end{example}
 
   \begin{remark}
-    The SSO-service must have done bootstrapping as rigorously as we would 
+    This third party must have done bootstrapping as rigorously as we would 
     have.
   \end{remark}
 \end{frame}
@@ -174,6 +194,6 @@
 
 \begin{frame}[allowframebreaks]
 	\small
-  \printbibliography{}
+  \printbibliography
 \end{frame}
 
