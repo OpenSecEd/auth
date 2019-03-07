@@ -25,6 +25,7 @@ The suggested progression of the contents is as follows:
  - `bootstrapping` (recording)
  - `user-machine` (recording)
  - `something-you-know` (recording)
+ - `something-you-have` (recording)
  - `machine-user` (recording)
 
 

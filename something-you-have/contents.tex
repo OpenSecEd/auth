@@ -1,0 +1,267 @@
+\mode*
+
+% Since this a solution template for a generic talk, very little can
+% be said about how it should be structured. However, the talk length
+% of between 15min and 45min and the theme suggest that you stick to
+% the following rules:  
+
+% - Exactly two or three sections (other than the summary).
+% - At *most* three subsections per section.
+% - Talk about 30s to 2min per frame. So there should be between about
+%   15 and 30 frames, all told.
+
+
+\section{Something you have/know}
+
+\subsection{Cryptographic approaches}
+
+\begin{frame}
+  \begin{example}[Something you \dots]
+    \begin{itemize}
+      \item know (passwords)
+      \item have (hardware tokens)
+      \item are (passive biometrics)
+      \item do (active biometrics)
+    \end{itemize}
+  \end{example}
+
+  \pause{}
+
+  \begin{remark}
+    \begin{itemize}
+      \item Do you \emph{know} a private key or do you \emph{have} one?
+      \item A password you \emph{know}.
+      \item A private key in a hardware token you \emph{have}.
+      \item If the key is stored on your disk?
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Passive biometrics]
+    \begin{itemize}
+      \item Fingerprint
+      \item Irises
+      \item DNA
+    \end{itemize}
+  \end{example}
+
+  \pause{}
+
+  \begin{example}[Active biometrics]
+    \begin{itemize}
+      \item Typing speed
+      \item Cursor movement
+      \item Web surfing behaviour
+      \item Pressure points in signature
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{exercise}
+    \begin{itemize}
+      \item What about something you are (passive biometrics)?
+      \item When is that more than merely a password?
+    \end{itemize}
+  \end{exercise}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Fingerprints for iPhones]
+    \begin{itemize}
+      \item The iPhone can trust its built-in fingerprint reader.
+      \item We know that we read an actual finger.
+      \item We know when we read it, so we have freshness.
+    \end{itemize}
+  \end{example}
+
+  \pause{}
+
+  \begin{example}[Fingerprints for web services]
+    \begin{itemize}
+      \item Fingerprint reader connected to laptop.
+      \item Browser scans and sends fingerprint to server.
+      \item Anyone could send that data, without the reader.
+      \item We lack freshness guarantees.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{remark}
+    \begin{itemize}
+      \item We need freshness.
+      \item We must store the fingerprint somewhere, to compare.
+      \item Someone can copy that data.
+      \item Without freshness they can use it --- as a password.
+    \end{itemize}
+  \end{remark}
+
+  \pause{}
+
+  \begin{remark}
+    \begin{itemize}
+      \item Similar for interactive biometrics.
+      \item Record and replay.
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\begin{frame}
+  \begin{exercise}
+    \begin{itemize}
+      \item How can we ensure freshness?
+      \item What data do we need to store for this?
+      \item How can we secure that data?
+    \end{itemize}
+  \end{exercise}
+\end{frame}
+
+\begin{frame}
+  \begin{solution}
+    \begin{itemize}
+      \item Freshness is about challenge and response.
+      \item Password-based authentication: the same challenge all the time.
+      \item Improvement: random challenge, hard-to-guess response.
+    \end{itemize}
+  \end{solution}
+\end{frame}
+
+\subsection{Anonymous Credentials}
+
+\begin{frame}
+  \begin{example}[Age limits]
+    \begin{itemize}
+      \item Bob wants to go see a film in cinema.
+      \item Bob looks very young so Alice who works there wants to have proof 
+        of his age.
+
+        \pause{}
+
+      \item Show physical ID, reveals name, exact date of birth, \dots
+    \end{itemize}
+  \end{example}
+
+  \pause{}
+
+  \begin{exercise}
+    \begin{itemize}
+      \item That's a bit overkill, right?
+      \item What does Alice actually need to know?
+      \item In what direction must we move to achieve that?
+    \end{itemize}
+  \end{exercise}
+\end{frame}
+
+\begin{frame}
+  \begin{block}{What Alice needs?}
+    She must be convinced that Bob is older than 15.
+  \end{block}
+
+  \pause{}
+
+  \begin{alertblock}{How can she learn that?}
+    \begin{enumerate}
+      \item She has known Bob since he was born, so she knows.
+
+        \pause{}
+
+      \item She can ask someone \emph{she trusts} who knows Bob is older than 
+        15.
+    \end{enumerate}
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}
+  \begin{alertblock}{But how can she do that?}
+    \begin{enumerate}
+      \item The trusted person who knows Bob is with Alice.
+
+        \pause{}
+
+      \item Alice can send a picture to the other person who verifies.
+        \begin{itemize}
+          \item This requires an \emph{authenticated} channel.
+        \end{itemize}
+
+        \pause{}
+
+      \item The trusted person made a certificate for Bob showing that he's 
+        older than 15.
+        \begin{itemize}
+          \item Alice must be able to \emph{verify} the certificate.
+          \item Bob must bring this certificate with himself everywhere.
+        \end{itemize}
+
+    \end{enumerate}
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}
+  \begin{alertblock}{Alice interacts with the trusted person}
+    \begin{itemize}
+      \item Gaah, but Bob doesn't want the trusted person (his parents) to know 
+        he's at the cinema right now!
+      \item It's a small cinema so they'll know which film he sees if they 
+        learn when he's there.
+    \end{itemize}
+  \end{alertblock}
+
+  \pause{}
+
+  \begin{alertblock}{Alice reads and verifies the certificate}
+    \begin{itemize}
+      \item Phew, she accepted the note from his parents.
+      \item But now Alice learned all those embarrassing things in 
+        there.
+        \begin{itemize}
+          \item And Bob who has a crush on Alice \dots
+        \end{itemize}
+    \end{itemize}
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}
+  \begin{block}{The idea}
+    \begin{itemize}
+      \item What if Bob could convince Alice
+        \begin{itemize}
+          \item that he has a certificate saying he's older than 15,
+          \item and is signed by someone Alice trusts.
+        \end{itemize}
+      \item Wouldn't that be awesome?
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Anonymous 
+    Credentials\footfullcite{ElectronicIdentitiesNeedPrivateCredentials}]
+    \begin{itemize}
+      \item Makes heavy use of zero-knowledge proofs of knowledge.
+      \item Can prove equalities, inequalities, knowledge, ownership, \dots
+      \item Implementations and approaches:
+        \begin{description}
+          \item[Identity Mixer]
+            \url{https://www.research.ibm.com/labs/zurich/idemix/}
+          \item[U-Prove]
+            \url{http://research.microsoft.com/en-us/projects/u-prove/}
+          \item[AnonPass]
+            \url{https://eprint.iacr.org/2013/317}
+          \item[IRMA]
+            \url{https://www.irmacard.org/irma/}
+        \end{description}
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[allowframebreaks]
+	\small
+  \printbibliography{}
+\end{frame}
+
