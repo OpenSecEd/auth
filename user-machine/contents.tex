@@ -16,142 +16,220 @@
 \subsection{What's the problem?}
 
 \begin{frame}
-  \begin{example}[Identifiers]
+  \begin{idea}
     \begin{itemize}
-      \item Username or User ID
-      \item The person who opened the account
-      \item Personal Identification Number (Swe.\ personnummer, Eng.\ Social 
-        Security Number)
+      \item A machine provides a service.
+      \item A user wants to authenticate to the machine to use the service.
+      \item How can the machine know the user is the right one?
+    \end{itemize}
+  \end{idea}
 
-        \pause{}
-
-      \item Fingerprint
-      \item Iris scan
-      \item DNA sequence \dots
+  \begin{example}
+    \begin{itemize}
+      \item The machine is the user's computer.
+      \item The machine is the user's smartphone.
+      \item The machine is the user's smartcard (\eg VISA, MasterCard).
     \end{itemize}
   \end{example}
-
-  \pause{}
-
-  \begin{exercise}
-    Any other methods of user identification that you have encountered?
-  \end{exercise}
 \end{frame}
 
-\subsection{Some approaches}
+\subsection{General approaches}
 
 \begin{frame}
-  \begin{example}[Methods for user authentication]
+  \begin{idea}[Methods for user authentication]
     \begin{itemize}
       \item Something you \emph{know}
 
-        \pause{}
+        \pause
 
       \item Something you \emph{have}
 
-        \pause{}
+        \pause
 
-      \item \emph{Where} you are
+      \item Something you \emph{are}
+    \end{itemize}
+  \end{idea}
+\end{frame}
 
-        \pause{}
-
-      \item \emph{Who} you are
-      \item What you \emph{do}
+\begin{frame}
+  \begin{example}[Something you know]
+    \begin{itemize}
+      \item A password (PIN, swipe pattern, \etc).
+      \item A cryptographic key (a longer password).
     \end{itemize}
   \end{example}
 \end{frame}
 
-\subsection{Multi-factor user-authentication}
+\begin{frame}
+  \begin{example}[Something you have]
+    \begin{itemize}
+      \item \Iac{PUF}.
+      \item A hardware token (smartcard, embedded cryptographic key).
+    \end{itemize}
+  \end{example}
+
+  \pause
+
+  \begin{remark}
+    \begin{itemize}
+      \item Where's the border between something you know and something you 
+        have?
+      \item Do you know or have a cryptographic key?
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Something you are, biometrics]
+    \begin{itemize}
+      \item Fingerprint
+      \item Iris
+      \item Gait (walking style)
+      \item Handwriting (style, pressure points, \etc)
+      \item Ear shape
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\subsection{Multi-factor authentication}
 
 \begin{frame}
   \begin{definition}[Multi-factor authentication]
     \begin{itemize}
-      \item Combine two or more methods of authentication.
+      \item Combine two or more methods of authentication: something you know, 
+        have or are.
     \end{itemize}
   \end{definition}
-
-  \begin{example}[Methods for user authentication]
-    \begin{itemize}
-      \item Something you \emph{know}
-      \item Something you \emph{have}
-      \item \emph{Where} you are
-      \item \emph{Who} you are
-      \item What you \emph{do}
-    \end{itemize}
-  \end{example}
 \end{frame}
 
 \begin{frame}
   \begin{example}[Single-factor authentication]
     \begin{description}
-      \item[Identification] Username or similar
-      \item[Authentication] Something you know, i.e.\ a password
+      \item[Identification] Username
+      \item[Authentication] Something you know, \ie a password
     \end{description}
   \end{example}
 
   \pause{}
 
-  \begin{example}[Multi-factor authentication]
+  \begin{example}[Two-factor authentication]
     \begin{description}
-      \item[Identification] Username or similar
+      \item[Identification] Username
       \item[Authentication] Something you know together with something you 
-        have, e.g.\ password and mobile phone
+        have, \eg password and mobile phone
     \end{description}
   \end{example}
 \end{frame}
 
-\section[Securing]{Securing Authentication}
 
-\subsection{Guessing Passwords}
+\section{Something you know}
 
-\begin{frame}
-  \begin{itemize}
-    \item Guessing passwords is like searching for a needle in a haystack.
-
-      \pause{}
-
-    \item (Un)fortunately, the needle is placed by a human --- not uniformly 
-      randomly!
-    \item This makes guessing easier.
-    \item Human-chosen passwords will only occupy parts of the password space.
-  \end{itemize}
-\end{frame}
+\subsection{\enquote{Proof of knowledge}}
 
 \begin{frame}
-  \begin{itemize}
-    \item The effort is a spectrum.
-
-    \item It ranges from brute-force exhaustive search \dots
-
-      \pause{}
-
-    \item \dots via \enquote{educated guessing} \dots
-
-      \pause{}
-
-    \item \dots to getting the password from the user directly.
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \begin{example}[Basic guessing]
+  \begin{idea}[Something you know]
     \begin{itemize}
-      \item Using dictionaries of words.
-      \item Adapt to guesses to password policy, if known.
-      \item \dots
+      \item We have a prover and a verifier.
+      \item Prover must convince verifier he knows some secret.
+    \end{itemize}
+  \end{idea}
+
+  \begin{idea}[Password]
+    \begin{itemize}
+      \item Prover and verifier shares a secret value.
+      \item Prover tells verifier the value to convince the verifier.
+    \end{itemize}
+  \end{idea}
+\end{frame}
+
+\begin{frame}
+  \begin{remark}
+    \begin{itemize}
+      \item If the adversary learns the secret, he can convince the verifier he 
+        is the prover.
+    \end{itemize}
+  \end{remark}
+
+  \begin{example}
+    \begin{itemize}
+      \item Adversary might \enquote{overhear the conversation}.
+      \item Adversary might \enquote{trick} the prover to reveal the secret.
+      \item Adversary might guess the secret.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\subsection{Guessing secrets}
+
+\begin{frame}
+  \begin{idea}
+    \begin{itemize}
+      \item The secret~\(x\) is chosen from a probability distribution.
+      \item The probability of guessing correctly is \(\Pr[X = x]\).
+    \end{itemize}
+  \end{idea}
+
+  \begin{remark}
+    \begin{itemize}
+      \item The question is what the probability distribution is.
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Cryptographic keys]
+    \begin{itemize}
+      \item The distribution is \emph{very} close to the uniform distribution.
+      \item \Ie \(\Pr[X = x] = 1/n\), where \(X\) can take \(n\) possible 
+        values.
+      \item In crypto, normally \(n = 2^{128}\).
     \end{itemize}
   \end{example}
 
-  \pause{}
+  \pause
 
-  \begin{example}[Improved guessing]
-    Take grammar into account, depending on the password 
-    type~\cite{Bonneau2012ghs,Bonneau2012lpo}.
+  \begin{example}[Password]
+    \begin{itemize}
+      \item Distribution of passwords is affected by so many factors.
+      \item The individual, situation, password policies, \etc.
+    \end{itemize}
   \end{example}
 \end{frame}
 
 \begin{frame}
-  \begin{example}[Learn from humans]
+  \begin{figure}
+    \includegraphics[height=0.9\textheight]{distributions.png}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \begin{idea}[Guessing passwords]
+    \begin{itemize}
+      \item Find a way to approximate the distribution.
+    \end{itemize}
+  \end{idea}
+
+  \begin{example}[Basic guessing]
+    \begin{itemize}
+      \item Using dictionaries of words.
+      \item Adapt guesses to password policy, if known.
+      \item \dots
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Improved guessing]
+    \begin{itemize}
+      \item Use leaked passwords as guesses.
+      \item Take grammar into account, depending on the password 
+        type~\cite{Bonneau2012ghs,Bonneau2012lpo}.
+    \end{itemize}
+  \end{example}
+
+  \pause
+
+  \begin{example}[Machine learning]
     \begin{itemize}
       \item Use machine learning~\cite{JohnTheRipper,OMEN,WeirPCFG}.
       \item Train algorithm on leaked password databases.
@@ -164,7 +242,7 @@
   \begin{remark}
     \begin{itemize}
       \item This is relevant when the user has chosen a password.
-      \item In the majority of situations it's not.
+      \item In many situations it's not.
     \end{itemize}
   \end{remark}
 
@@ -173,80 +251,175 @@
   \begin{example}
     \begin{itemize}
       \item There are many devices with default passwords.
-      \item E.g.\ home routers, \dots
+      \item \Eg home routers, \dots
     \end{itemize}
   \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Mirai botnet~\cite{MiraiAnalysis}]
+    \begin{itemize}
+      \item Botnet infecting primarily surveillance cameras and home routers.
+      \item Attempts default passwords and other vulnerabilities.
+      \item Managed the largest \ac{DDoS} attack hitherto.
+    \end{itemize}
+  \end{example}
+
+  \begin{remark}
+    \begin{itemize}
+      \item These default passwords have very high probability.
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\begin{frame}
+  \begin{idea}[Autogenerate passwords]
+    \begin{itemize}
+      \item Generate passwords for users.
+      \item This yields a uniform distribution.
+    \end{itemize}
+  \end{idea}
+
+  \begin{remark}[Usability]
+    \begin{itemize}
+      \item This will likely reduce security by use of post-it notes.
+      \item Not a problem for a home router.
+      \item Otherwise: will require password managers.
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\begin{frame}
+  \begin{idea}[Password policy]
+    \begin{itemize}
+      \item Introduce rules to affect how users choose passwords.
+      \item We require upper, lower case, numbers, special characters.
+      \item Then passwords will be more uniform-looking.
+    \end{itemize}
+  \end{idea}
+
+  \begin{remark}[Usability]
+    \begin{itemize}
+      \item This has been proven a bad idea.
+      \item Research has estimated the distribution under various 
+        policies~\cite{Komanduri2011opa}.
+      \item Better to only require length.
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\begin{frame}
+  \begin{idea}[Password ageing]
+    \begin{itemize}
+      \item Let passwords age and expire.
+      \item Then users change them frequently.
+      \item If it takes six months to guess and we change every three \dots
+    \end{itemize}
+  \end{idea}
+
+  \begin{remark}[Usability]
+    \begin{itemize}
+      \item This has been proven a bad idea.
+      \item Annoying with too short intervals.
+      \item Will reduce security once users introduce systems to remember their 
+        last changed password.
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+
+\subsection{Online or offline?}
+
+\begin{frame}
+  \begin{definition}[Online]
+    \begin{itemize}
+      \item The adversary must interact with the system for each guess.
+    \end{itemize}
+  \end{definition}
+
+  \pause
+
+  \begin{definition}[Offline]
+    \begin{itemize}
+      \item The adversary can verify the guess himself.
+    \end{itemize}
+  \end{definition}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Online]
+    \begin{itemize}
+      \item Guessing the password of a Google account.
+      \item Must submit each guess to Google.
+    \end{itemize}
+  \end{example}
+
+  \pause
+
+  \begin{example}[Offline]
+    \begin{itemize}
+      \item Guessing the password of an encrypted file.
+      \item For each guess, try to decrypt.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{solution}[Rate limiting]
+    \begin{itemize}
+      \item For online guessing, rate limit the attempts.
+      \item This makes guessing too slow.
+    \end{itemize}
+  \end{solution}
+
+  \pause
+
+  \begin{remark}
+    \begin{itemize}
+      \item This works for targeted attacks.
+      \item Introduces possibility for denial-of-service.
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\begin{frame}[fragile]
+  \begin{exercise}
+    \begin{itemize}
+      \item How will rate limiting affect these?
+    \end{itemize}
+
+    \begin{minipage}{0.45\textwidth}
+      \begin{lstlisting}
+for u in users:
+  for p in passwds:
+    try_login(u, p)
+      \end{lstlisting}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+      \begin{lstlisting}
+for p in passwds:
+  for u in users:
+    try_login(u, p)
+      \end{lstlisting}
+    \end{minipage}
+  \end{exercise}
 \end{frame}
 
 \begin{frame}
   \begin{remark}
     \begin{itemize}
-      \item The problem of default passwords has increased recently.
-      \item Home routers, web cameras are open to attack.
+      \item Maybe we don't care about which user.
+      \item If a password is common, then it's likely that \emph{some} user 
+        chose it.
+      \item And if we try one password for each user we might not trigger the 
+        rate limiting.
     \end{itemize}
   \end{remark}
-
-  \pause{}
-
-  \begin{example}[Mirai botnet~\cite{MiraiAnalysis}]
-    \begin{itemize}
-      \item Botnet infecting primarily surveillance cameras.
-      \item Attempts default passwords and other vulnerabilities.
-      \item Managed the largest \ac{DDoS} attack hitherto.
-    \end{itemize}
-  \end{example}
 \end{frame}
 
 \begin{frame}
-  \begin{exercise}
-    \begin{itemize}
-      \item This is a problem when the authentication mechanism faces the 
-        Internet.
-
-      \item E.g.\ home routers where the admin interface only faces the local 
-        network should be fine.
-
-      \item (The same if we have a white list of addresses allowed access.)
-
-      \item What do you think?
-    \end{itemize}
-  \end{exercise}
-\end{frame}
-
-\begin{frame}
-  \begin{example}[Autogenerate passwords]
-    \begin{itemize}
-      \item Generate passwords for users.
-      \item This will likely reduce security by use of post-it notes.
-      \item Not a problem for a home router.
-    \end{itemize}
-  \end{example}
-\end{frame}
-
-\begin{frame}
-  \begin{example}[Password ageing]
-    \begin{itemize}
-      \item Let passwords age and expire.
-      \item Annoying with too short intervals.
-      \item Will reduce security once users introduce systems to remember their 
-        last changed password.
-      \item Just an expiration date for the generated one, infinite selected by
-        user.
-    \end{itemize}
-  \end{example}
-\end{frame}
-
-\begin{frame}
-  \begin{example}[Rate limiting]
-    \begin{itemize}
-      \item Remove online guessing by limited login attempts.
-      \item Introduces the possibility of denial of service.
-    \end{itemize}
-  \end{example}
-\end{frame}
-
-\begin{frame}
-  \begin{remark}[Offline data]
+  \begin{remark}[Offline]
     \begin{itemize}
       \item Consider data which is encrypted with a password.
       \item You cannot change a password for data that is already stolen.
@@ -256,7 +429,7 @@
   \end{remark}
 \end{frame}
 
-\subsection{The Password File}
+\subsection{Storing secrets}
 
 \begin{frame}
   \begin{exercise}
@@ -369,7 +542,26 @@
   \end{example}
 \end{frame}
 
-\subsection{Alternative Approaches}
+\begin{frame}
+  \begin{exercise}
+    \begin{itemize}
+      \item This is a problem when the authentication mechanism faces the 
+        Internet.
+
+      \item \Eg home routers where the admin interface only faces the local 
+        network should be fine.
+
+      \item (The same if we have a white list of addresses allowed access.)
+
+      \item What do you think?
+    \end{itemize}
+  \end{exercise}
+\end{frame}
+
+
+\section{Something you know/have}
+
+\subsection{Cryptographic approaches}
 
 \begin{frame}
   \begin{example}[Something you \dots]
