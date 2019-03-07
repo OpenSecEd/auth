@@ -161,6 +161,22 @@
   \end{remark}
 \end{frame}
 
+%\begin{frame}
+%  \begin{exercise}
+%    \begin{itemize}
+%      \item This is a problem when the authentication mechanism faces the 
+%        Internet.
+%
+%      \item \Eg home routers where the admin interface only faces the local 
+%        network should be fine.
+%
+%      \item (The same if we have a white list of addresses allowed access.)
+%
+%      \item What do you think?
+%    \end{itemize}
+%  \end{exercise}
+%\end{frame}
+
 \begin{frame}
   \begin{idea}[Autogenerate passwords]
     \begin{itemize}
@@ -329,27 +345,33 @@ for p in passwds:
 \subsection{Storing secrets}
 
 \begin{frame}
-  \begin{exercise}
+  \begin{remark}
     \begin{itemize}
-      \item We now have data to authenticate users.
-      \item How do we store this data?
-      \item What problems do you see?
+      \item The user can store the secret in its mind.
+      \item This is assumed inaccessible (for now).
     \end{itemize}
-  \end{exercise}
+  \end{remark}
+
+  \pause
+
+  \begin{question}
+    \begin{itemize}
+      \item The verifier is a machine.
+      \item The verifier must verify what the prover says.
+      \item This means that the verifier must have some data to check against.
+      \item How should this be stored?
+    \end{itemize}
+  \end{question}
 \end{frame}
 
 \begin{frame}
-  \begin{example}[Password-based authentication]
+  \begin{remark}
     \begin{itemize}
-      \item Traditionally, there is a password file (or database).
-      \item This contains all users' passwords.
-
-        \pause{}
-
-      \item If someone copies this data, he or she could impersonate any user 
-        in the system.
+      \item Our concern is that someone can read this data.
+      \item This helps better approximate the distribution.
+      \item Password reuse for other services?
     \end{itemize}
-  \end{example}
+  \end{remark}
 \end{frame}
 
 \begin{frame}
@@ -385,12 +407,12 @@ for p in passwds:
     \end{itemize}
   \end{remark}
 
-  \pause{}
+  \pause
 
   \begin{solution}
     \begin{itemize}
       \item Choose \(h\) to be slow to compute.
-      \item E.g.\ iterate it over itself 10\,000 times.
+      \item \Eg iterate it over itself 10\,000 times.
       \item This will slow down guessing attacks.
     \end{itemize}
   \end{solution}
@@ -399,7 +421,7 @@ for p in passwds:
 \begin{frame}
   \begin{remark}
     \begin{itemize}
-      \item The password file structure reveals if two users have the same 
+      \item A list of password hashes reveals if two users have the same 
         password.
       \item Can guess the password for all users at once:
         \begin{enumerate}
@@ -409,13 +431,13 @@ for p in passwds:
     \end{itemize}
   \end{remark}
 
-  \pause{}
+  \pause
 
   \begin{solution}
     \begin{itemize}
-      \item Add a \emph{salt}: a small random value (e.g.\ 128 bits) unique for 
+      \item Add a \emph{salt}: a small random value (\eg 128 bits) unique for 
         each user.
-      \item Include this value in the computation of the password hash.
+      \item Salt~\(s\rgets \bin^{128}\), change hash to \(h(s, p)\).
       \item Now all hashes will be unique.
     \end{itemize}
   \end{solution}
@@ -424,7 +446,7 @@ for p in passwds:
 \begin{frame}
   \begin{remark}
     \begin{itemize}
-      \item The salt is not a secret, it's just unique.
+      \item The salt is not a secret, it just adds uniqueness.
       \item It can be stored in plain text along with the password hash.
     \end{itemize}
   \end{remark}
@@ -433,26 +455,12 @@ for p in passwds:
 \begin{frame}
   \begin{example}
     \begin{itemize}
+      \item There are many libraries.
       \item bcrypt~\cite{bcrypt} implements all this functionality.
-      \item It should also be available in most languages and libraries.
+      \item Argon2 is another, more recent technique.
+      \item They should also be available in most languages and libraries.
     \end{itemize}
   \end{example}
-\end{frame}
-
-\begin{frame}
-  \begin{exercise}
-    \begin{itemize}
-      \item This is a problem when the authentication mechanism faces the 
-        Internet.
-
-      \item \Eg home routers where the admin interface only faces the local 
-        network should be fine.
-
-      \item (The same if we have a white list of addresses allowed access.)
-
-      \item What do you think?
-    \end{itemize}
-  \end{exercise}
 \end{frame}
 
 
