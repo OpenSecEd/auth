@@ -21,10 +21,10 @@ Progression
 
 The suggested progression of the contents is as follows:
 
- - `intro`
- - `bootstrapping`
- - `user-machine`
- - `machine-user`
+ - `intro` (recording)
+ - `bootstrapping` (recording)
+ - `user-machine` (recording)
+ - `machine-user` (recording)
 
 
 File Structure and Building
