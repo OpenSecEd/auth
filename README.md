@@ -24,6 +24,7 @@ The suggested progression of the contents is as follows:
  - `intro` (recording)
  - `bootstrapping` (recording)
  - `user-machine` (recording)
+ - `something-you-know` (recording)
  - `machine-user` (recording)
 
 
