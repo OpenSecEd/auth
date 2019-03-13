@@ -13,6 +13,44 @@
 
 \section{Something you have/know}
 
+\subsection{Essence of authentication}
+
+\begin{frame}
+  \begin{remark}[Essence of authentication]
+    \begin{itemize}
+      \item Authentication is a challenge--response protocol.
+      \item The verifier gives the prover a challenge.
+      \item The prover responds to the verifier's challenge.
+    \end{itemize}
+  \end{remark}
+
+  \pause
+
+  \begin{example}[Passwords]
+    \begin{itemize}
+      \item Verifier's challenge: \enquote{what's the password?}
+      \item Prover's response: the password.
+    \end{itemize}
+  \end{example}
+
+  \pause
+
+  \begin{remark}[Predictability]
+    \begin{itemize}
+      \item The challenge is predictable.
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\begin{frame}
+  \begin{question}
+    \begin{itemize}
+      \item Can we make the secrets more hard to guess?
+      \item Can we have different challenges with different responses?
+    \end{itemize}
+  \end{question}
+\end{frame}
+
 \subsection{Cryptographic approaches}
 
 \begin{frame}
@@ -38,87 +76,6 @@
 \end{frame}
 
 \begin{frame}
-  \begin{example}[Passive biometrics]
-    \begin{itemize}
-      \item Fingerprint
-      \item Irises
-      \item DNA
-    \end{itemize}
-  \end{example}
-
-  \pause{}
-
-  \begin{example}[Active biometrics]
-    \begin{itemize}
-      \item Typing speed
-      \item Cursor movement
-      \item Web surfing behaviour
-      \item Pressure points in signature
-    \end{itemize}
-  \end{example}
-\end{frame}
-
-\begin{frame}
-  \begin{exercise}
-    \begin{itemize}
-      \item What about something you are (passive biometrics)?
-      \item When is that more than merely a password?
-    \end{itemize}
-  \end{exercise}
-\end{frame}
-
-\begin{frame}
-  \begin{example}[Fingerprints for iPhones]
-    \begin{itemize}
-      \item The iPhone can trust its built-in fingerprint reader.
-      \item We know that we read an actual finger.
-      \item We know when we read it, so we have freshness.
-    \end{itemize}
-  \end{example}
-
-  \pause{}
-
-  \begin{example}[Fingerprints for web services]
-    \begin{itemize}
-      \item Fingerprint reader connected to laptop.
-      \item Browser scans and sends fingerprint to server.
-      \item Anyone could send that data, without the reader.
-      \item We lack freshness guarantees.
-    \end{itemize}
-  \end{example}
-\end{frame}
-
-\begin{frame}
-  \begin{remark}
-    \begin{itemize}
-      \item We need freshness.
-      \item We must store the fingerprint somewhere, to compare.
-      \item Someone can copy that data.
-      \item Without freshness they can use it --- as a password.
-    \end{itemize}
-  \end{remark}
-
-  \pause{}
-
-  \begin{remark}
-    \begin{itemize}
-      \item Similar for interactive biometrics.
-      \item Record and replay.
-    \end{itemize}
-  \end{remark}
-\end{frame}
-
-\begin{frame}
-  \begin{exercise}
-    \begin{itemize}
-      \item How can we ensure freshness?
-      \item What data do we need to store for this?
-      \item How can we secure that data?
-    \end{itemize}
-  \end{exercise}
-\end{frame}
-
-\begin{frame}
   \begin{solution}
     \begin{itemize}
       \item Freshness is about challenge and response.
@@ -129,6 +86,19 @@
 \end{frame}
 
 \subsection{Anonymous Credentials}
+
+\begin{frame}
+  \begin{block}{The idea}
+    \begin{itemize}
+      \item What if Bob could convince Alice
+        \begin{itemize}
+          \item that he has a certificate saying he's older than 15,
+          \item and is signed by someone Alice trusts.
+        \end{itemize}
+      \item Wouldn't that be awesome?
+    \end{itemize}
+  \end{block}
+\end{frame}
 
 \begin{frame}
   \begin{example}[Age limits]
@@ -255,6 +225,95 @@
     \end{itemize}
   \end{example}
 \end{frame}
+
+
+\section{Something you are}
+
+\subsection{Active and passive biometrics}
+
+\begin{frame}
+  \begin{example}[Passive biometrics]
+    \begin{itemize}
+      \item Fingerprint
+      \item Irises
+      \item DNA
+    \end{itemize}
+  \end{example}
+
+  \pause
+
+  \begin{example}[Active biometrics]
+    \begin{itemize}
+      \item Typing speed
+      \item Cursor movement
+      \item Web surfing behaviour
+      \item Pressure points in signature
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\subsection{Passive biometrics}
+
+\begin{frame}
+  \begin{exercise}
+    \begin{itemize}
+      \item What about something you are (passive biometrics)?
+      \item When is that more than merely a password?
+    \end{itemize}
+  \end{exercise}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Fingerprints for iPhones]
+    \begin{itemize}
+      \item The iPhone can trust its built-in fingerprint reader.
+      \item We know that we read an actual finger.
+      \item We know when we read it, so we have freshness.
+    \end{itemize}
+  \end{example}
+
+  \pause
+
+  \begin{example}[Fingerprints for web services]
+    \begin{itemize}
+      \item Fingerprint reader connected to laptop.
+      \item Browser scans and sends fingerprint to server.
+      \item Anyone could send that data, without the reader.
+      \item We lack freshness guarantees.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{remark}
+    \begin{itemize}
+      \item We need freshness.
+      \item We must store the fingerprint somewhere, to compare.
+      \item Someone can copy that data.
+      \item Without freshness they can use it --- as a password.
+    \end{itemize}
+  \end{remark}
+
+  \pause
+
+  \begin{remark}
+    \begin{itemize}
+      \item Similar for interactive biometrics.
+      \item Record and replay.
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\begin{frame}
+  \begin{exercise}
+    \begin{itemize}
+      \item How can we ensure freshness?
+      \item What data do we need to store for this?
+      \item How can we secure that data?
+    \end{itemize}
+  \end{exercise}
+\end{frame}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%

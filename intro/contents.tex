@@ -73,8 +73,6 @@
   \end{exercise}
 \end{frame}
 
-\subsection{Other attributes}
-
 \begin{frame}
   \begin{example}
     \begin{itemize}
@@ -86,15 +84,99 @@
   \end{example}
 \end{frame}
 
+\subsection{Authenticating}
+
 \begin{frame}
+  \begin{example}[Age limits]
+    \begin{itemize}
+      \item Bob wants to go see a film in cinema.
+      \item Bob looks very young so Alice who works there wants to have proof 
+        of his age.
+
+        \pause
+
+      \item Show physical ID, reveals name, exact date of birth, \dots
+    \end{itemize}
+  \end{example}
+
+  \pause
+
   \begin{exercise}
     \begin{itemize}
-      \item How do you authenticate a claim about age?
+      \item That's a bit overkill, right?
+      \item What does Alice actually need to know?
+      \item In what direction must we move to achieve that?
     \end{itemize}
   \end{exercise}
 \end{frame}
 
-\subsection{Authenticating}
+\begin{frame}
+  \begin{block}{What Alice needs?}
+    She must be convinced that Bob is older than 15.
+  \end{block}
+
+  \pause
+
+  \begin{alertblock}{How can she learn that?}
+    \begin{enumerate}
+      \item She has known Bob since he was born, so she knows.
+
+        \pause
+
+      \item She can ask someone \emph{she trusts} who knows Bob is older than 
+        15.
+    \end{enumerate}
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}
+  \begin{alertblock}{But how can she do that?}
+    \begin{enumerate}
+      \item The trusted person who knows Bob is with Alice.
+
+        \pause
+
+      \item Alice can send a picture to the other person who verifies.
+        \begin{itemize}
+          \item This requires an \emph{authenticated} channel.
+        \end{itemize}
+
+        \pause
+
+      \item The trusted person made a certificate for Bob showing that he's 
+        older than 15.
+        \begin{itemize}
+          \item Alice must be able to \emph{verify} the certificate.
+          \item Bob must bring this certificate with himself everywhere.
+        \end{itemize}
+
+    \end{enumerate}
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}
+  \begin{alertblock}{Alice interacts with the trusted person}
+    \begin{itemize}
+      \item Gaah, but Bob doesn't want the trusted person (his parents) to know 
+        he's at the cinema right now!
+      \item It's a small cinema so they'll know which film he sees if they 
+        learn when he's there.
+    \end{itemize}
+  \end{alertblock}
+
+  \pause
+
+  \begin{alertblock}{Alice reads and verifies the certificate}
+    \begin{itemize}
+      \item Phew, she accepted the note from his parents.
+      \item But now Alice learned all those embarrassing things in 
+        there.
+        \begin{itemize}
+          \item And Bob who has a crush on Alice \dots
+        \end{itemize}
+    \end{itemize}
+  \end{alertblock}
+\end{frame}
 
 \begin{frame}
   \begin{itemize}
