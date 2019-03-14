@@ -24,64 +24,73 @@
 
 \section{Introduction}
 
+Authentication is a vital part of most services.
+The still most dominant authentication method is password based.
+Passwords have their place in security, but they are over-used.
+A person should need one or two passwords, not one or two \emph{hundred} 
+passwords.
+Password reuse is very bad for security, so there must be one strong, unique 
+password for every service the user is interested in.
+However, the need to keep track of hundreds of strong, unique passwords has 
+developed the need for password managers.
+Since no user remember any of these two hundred passwords, they could just as 
+well be cryptographic keys, which would allow for more secure authentication 
+methods.
+
+When users must remember their credentials they tent to converge to using the 
+same credentials for all services.
+As pointed out above, such password reuse is bad.
+But there is also a privacy issue.
+Such systems use identity-based authentication.
+Usually the email address is used as the identifier, and all of a user's 
+actions can be attributed to this identity.
+One issue with this practice of authentication is that it in many cases 
+violates the principle of data minimization\footnote{%
+  Data minimization requires that one uses only the bare minimum data that is 
+  absolutely needed.
+  This is one of the guiding principles of the \ac{GDPR}.
+}.
+For example, most services use identity-based authentication although it would 
+do fine with another (less informative) attribute.
+
+In this lab we are interested in exploring this topic from a security, privacy 
+and usability perspective.
+
+\subsection{Organization}
+
+This lab is divided into two parts: evaluating authentication and designing 
+authentication.
+Each part is then divided into several sessions.
+Work is done in groups.
+During the session the groups work on a problem, present and discuss the 
+results so that every group can learn the from the others.
+The groups can then refine their results and apply them to a bigger problem 
+that they will work on for the next session.
+
+
+\section{Evaluating authentication}
+
+\paragraph{Design evaluation criteria}
+
+During the session, design evaluation criteria in in groups.
+Remember to capture all perspectives: security, privacy and usability.
+Present each group's criteria to the class.
+
+\paragraph{Evaluate services}
+
+For the next session, evaluate a few services (per group).
+Pick one good example and one bad example to present to the class.
+During the session, after the presentations, we will synthesize the results 
+(lessons learned).
+
+
+\section{Designing authentication}
+
 \dots
-
-\subsection{What's the problem?}
-
-\dots
-
-\mode<presentation>{%
-  \begin{frame}
-    \begin{itemize}
-      \item \dots
-    \end{itemize}
-  \end{frame}
-}
-
-\subsection{Why is it a problem?}
-% Why is it a problem? Research gap left by other approaches?
-% Why is it important, why care?
-
-\dots
-
-\mode<presentation>{%
-  \begin{frame}
-    \begin{itemize}
-      \item \dots
-    \end{itemize}
-  \end{frame}
-}
-
-\subsection{What's the approach?}
-% What's the approach? How to solve the problem?
-
-\dots
-
-\mode<presentation>{%
-  \begin{frame}
-    \begin{itemize}
-      \item \dots
-    \end{itemize}
-  \end{frame}
-}
-
-\subsection{What are the findings?}
-% What's the findings? How was it evaluated, what are the results, limitations, 
-% what remains to be done?
-
-\dots
-
-\mode<presentation>{%
-  \begin{frame}
-    \begin{itemize}
-      \item \dots
-    \end{itemize}
-  \end{frame}
-}
 
 
 %%% REFERENCES %%%
 
 \begin{frame}[allowframebreaks]
-  \printbibliography{}
+  \printbibliography
 \end{frame}
