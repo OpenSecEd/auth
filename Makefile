@@ -5,6 +5,7 @@ SUBDIR+= 	something-you-know
 SUBDIR+= 	something-you-have
 SUBDIR+= 	machine-user
 SUBDIR+= 	passwd
+SUBDIR+= 	eval-design-lab
 
 
 INCLUDE_MAKEFILES=makefiles
