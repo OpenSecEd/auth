@@ -60,7 +60,7 @@
 
   \begin{remark}
     \begin{itemize}
-      \item The question is what the probability distribution is.
+      \item The question is: what is the probability distribution?
     \end{itemize}
   \end{remark}
 \end{frame}
@@ -252,20 +252,20 @@
 
   \pause
 
-  \begin{definition}[Offline]
-    \begin{itemize}
-      \item The adversary can verify the guess himself.
-    \end{itemize}
-  \end{definition}
-\end{frame}
-
-\begin{frame}
   \begin{example}[Online]
     \begin{itemize}
       \item Guessing the password of a Google account.
       \item Must submit each guess to Google.
     \end{itemize}
   \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{definition}[Offline]
+    \begin{itemize}
+      \item The adversary can verify the guess himself.
+    \end{itemize}
+  \end{definition}
 
   \pause
 
@@ -412,7 +412,7 @@ for p in passwds:
   \begin{solution}
     \begin{itemize}
       \item Choose \(h\) to be slow to compute.
-      \item \Eg iterate it over itself 10\,000 times.
+      \item \Eg iterate it over itself 10\,000 times (\(h^{10000}(p)\)).
       \item This will slow down guessing attacks.
     \end{itemize}
   \end{solution}
