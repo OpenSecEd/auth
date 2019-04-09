@@ -95,7 +95,7 @@
 
         \pause
 
-      \item Show physical ID, reveals name, exact date of birth, \dots
+      \item Show physical ID; reveals name, exact date of birth, \dots
     \end{itemize}
   \end{example}
 
@@ -147,6 +147,7 @@
         older than 15.
         \begin{itemize}
           \item Alice must be able to \emph{verify} the certificate.
+          \item Bob must not be able to forge such a certificate.
           \item Bob must bring this certificate with himself everywhere.
         \end{itemize}
 
@@ -171,16 +172,15 @@
       \item Phew, she accepted the note from his parents.
       \item But now Alice learned all those embarrassing things in 
         there.
-        \begin{itemize}
-          \item And Bob who has a crush on Alice \dots
-        \end{itemize}
     \end{itemize}
   \end{alertblock}
 \end{frame}
 
+\subsection{DIY or trust}
+
 \begin{frame}
   \begin{itemize}
-    \item Some attributes we can verify ourselves.
+    \item Some attributes we can verify ourselves (\ie DIY).
     \item For other attributes we rely on someone else (\ie trust).
   \end{itemize}
 \end{frame}
@@ -254,15 +254,6 @@
 \end{frame}
 
 \begin{frame}
-  \begin{exercise}
-    \begin{itemize}
-      \item Why is there a problem with the second example (personal computer), 
-        but not the first (bank office)?
-    \end{itemize}
-  \end{exercise}
-\end{frame}
-
-\begin{frame}
   \begin{remark}
     \begin{itemize}
       \item The key difference is that the first (bank) has \enquote{continuous 
@@ -272,9 +263,9 @@
       \item We need continuous authentication for the computer too.
     \end{itemize}
   \end{remark}
+\end{frame}
 
-  \pause
-
+\begin{frame}
   \begin{solution}
     \begin{itemize}
       \item We can approximate that with \emph{repeated authentication}.
@@ -293,6 +284,6 @@
 
 \begin{frame}[allowframebreaks]
 	\small
-  \printbibliography{}
+  \printbibliography
 \end{frame}
 
