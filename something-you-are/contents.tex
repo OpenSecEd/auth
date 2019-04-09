@@ -1,0 +1,110 @@
+\mode*
+
+% Since this a solution template for a generic talk, very little can
+% be said about how it should be structured. However, the talk length
+% of between 15min and 45min and the theme suggest that you stick to
+% the following rules:  
+
+% - Exactly two or three sections (other than the summary).
+% - At *most* three subsections per section.
+% - Talk about 30s to 2min per frame. So there should be between about
+%   15 and 30 frames, all told.
+
+
+\section{Something you are}
+
+\subsection{Active and passive biometrics}
+
+\begin{frame}
+  \begin{example}[Passive biometrics]
+    \begin{itemize}
+      \item Fingerprint
+      \item Irises
+      \item DNA
+    \end{itemize}
+  \end{example}
+
+  \pause
+
+  \begin{example}[Active biometrics]
+    \begin{itemize}
+      \item Typing speed
+      \item Cursor movement
+      \item Web surfing behaviour
+      \item Pressure points in signature
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\subsection{Passive biometrics}
+
+\begin{frame}
+  \begin{exercise}
+    \begin{itemize}
+      \item What about something you are (passive biometrics)?
+      \item When is that more than merely a password?
+    \end{itemize}
+  \end{exercise}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Fingerprints for iPhones]
+    \begin{itemize}
+      \item The iPhone can trust its built-in fingerprint reader.
+      \item We know that we read an actual finger.
+      \item We know when we read it, so we have freshness.
+    \end{itemize}
+  \end{example}
+
+  \pause
+
+  \begin{example}[Fingerprints for web services]
+    \begin{itemize}
+      \item Fingerprint reader connected to laptop.
+      \item Browser scans and sends fingerprint to server.
+      \item Anyone could send that data, without the reader.
+      \item We lack freshness guarantees.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{remark}
+    \begin{itemize}
+      \item We need freshness.
+      \item We must store the fingerprint somewhere, to compare.
+      \item Someone can copy that data.
+      \item Without freshness they can use it --- as a password.
+    \end{itemize}
+  \end{remark}
+
+  \pause
+
+  \begin{remark}
+    \begin{itemize}
+      \item Similar for interactive biometrics.
+      \item Record and replay.
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\begin{frame}
+  \begin{exercise}
+    \begin{itemize}
+      \item How can we ensure freshness?
+      \item What data do we need to store for this?
+      \item How can we secure that data?
+    \end{itemize}
+  \end{exercise}
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[allowframebreaks]
+	\small
+  \printbibliography
+\end{frame}
+
