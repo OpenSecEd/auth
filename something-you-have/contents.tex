@@ -1,0 +1,175 @@
+\mode*
+
+% Since this a solution template for a generic talk, very little can
+% be said about how it should be structured. However, the talk length
+% of between 15min and 45min and the theme suggest that you stick to
+% the following rules:  
+
+% - Exactly two or three sections (other than the summary).
+% - At *most* three subsections per section.
+% - Talk about 30s to 2min per frame. So there should be between about
+%   15 and 30 frames, all told.
+
+
+\section{Something you have/know}
+
+\subsection{Essence of authentication}
+
+\begin{frame}
+  \begin{remark}[Essence of authentication]
+    \begin{itemize}
+      \item Authentication is a challenge--response protocol.
+      \item The verifier gives the prover a challenge.
+      \item The prover responds to the verifier's challenge.
+    \end{itemize}
+  \end{remark}
+
+  \pause
+
+  \begin{example}[Passwords]
+    \begin{itemize}
+      \item Verifier's challenge: \enquote{what's the password?}
+      \item Prover's response: the password.
+    \end{itemize}
+  \end{example}
+
+  \pause
+
+  \begin{remark}[Predictability]
+    \begin{itemize}
+      \item The challenge is predictable.
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\begin{frame}
+  \begin{question}
+    \begin{itemize}
+      \item Can we make the secrets more hard to guess?
+      \item Can we have different challenges with different responses?
+    \end{itemize}
+  \end{question}
+\end{frame}
+
+\subsection{Cryptographic approaches}
+
+\begin{frame}
+  \begin{solution}
+    \begin{itemize}
+      \item Freshness is about challenge and response.
+      \item Password-based authentication: the same challenge all the time.
+      \item Improvement: random challenge, hard-to-guess response.
+      \item We can do this with crypto.
+    \end{itemize}
+  \end{solution}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Schnorr's protocol\footfullcite{Schnorr}]
+    \begin{itemize}
+      \item Prover's private key~\(x\), public key~\(g^x\).
+      \item Prover wants to prove knowledge of \(x\) for \(g^x = y\).
+
+        \pause
+
+      \item Prover commits to randomness \(r\), by sending \(t = g^r\).
+
+        \pause
+
+      \item Verifier replies with randomly chosen challenge \(c\).
+
+        \pause
+
+      \item After receiving \(c\), prover replies with \(s = r + cx\).
+
+        \pause{}
+
+      \item Verifier accepts if \(g^s = t y^c\).
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{remark}
+    \begin{itemize}
+      \item We need password managers anyway, might just as well use \(x\).
+
+        \pause
+
+      \item It's more common to have helping devices (smartphones).
+
+        \pause
+
+      \item \(y = g^x\) is public, no more leaked secrets from server hacks.
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\subsection{Anonymous Credentials}
+
+\begin{frame}
+  \begin{idea}
+    \begin{itemize}
+      \item Schnorr protocol is identity oriented.
+      \item Generalize to other attributes.
+    \end{itemize}
+  \end{idea}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Can do \dots]
+    \begin{itemize}
+      \item equalities
+      \item inequalities
+      \item conjunctions
+      \item disjunctions
+      \item knowledge of signatures
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Age limits]
+    \begin{itemize}
+      \item Bob wants to go see a film in cinema.
+      \item Alice who works there wants to have proof of his age.
+      
+        \pause
+
+      \item Bob has a certificate issued by someone Alice trusts.
+      \item Bob doesn't want to show everything in the certificate.
+      \item He proves that certificate says \(> 15\).
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Anonymous 
+    Credentials\footfullcite{ElectronicIdentitiesNeedPrivateCredentials}]
+    \begin{itemize}
+      \item Makes heavy use of zero-knowledge proofs of knowledge.
+      \item Can prove equalities, inequalities, knowledge, ownership, \dots
+      \item Implementations and approaches:
+        \begin{description}
+          \item[Identity Mixer]
+            \url{https://www.research.ibm.com/labs/zurich/idemix/}
+          \item[U-Prove]
+            \url{http://research.microsoft.com/en-us/projects/u-prove/}
+          \item[AnonPass]
+            \url{https://eprint.iacr.org/2013/317}
+          \item[IRMA]
+            \url{https://www.irmacard.org/irma/}
+        \end{description}
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[allowframebreaks]
+	\small
+  \printbibliography{}
+\end{frame}
+

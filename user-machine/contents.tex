@@ -1,0 +1,132 @@
+\mode*
+
+% Since this a solution template for a generic talk, very little can
+% be said about how it should be structured. However, the talk length
+% of between 15min and 45min and the theme suggest that you stick to
+% the following rules:  
+
+% - Exactly two or three sections (other than the summary).
+% - At *most* three subsections per section.
+% - Talk about 30s to 2min per frame. So there should be between about
+%   15 and 30 frames, all told.
+
+
+\section{User--machine authentication}
+
+\subsection{What's the problem?}
+
+\begin{frame}
+  \begin{idea}
+    \begin{itemize}
+      \item A machine provides a service.
+      \item A user wants to authenticate to the machine to use the service.
+      \item How can the machine know the user is the right one?
+    \end{itemize}
+  \end{idea}
+
+  \begin{example}
+    \begin{itemize}
+      \item The machine is the user's computer.
+      \item The machine is the user's smartphone.
+      \item The machine is the user's smartcard (\eg VISA, MasterCard).
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\subsection{General approaches}
+
+\begin{frame}
+  \begin{idea}[Methods for user authentication]
+    \begin{itemize}
+      \item Something you \emph{know}
+
+        \pause
+
+      \item Something you \emph{have}
+
+        \pause
+
+      \item Something you \emph{are}
+    \end{itemize}
+  \end{idea}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Something you know]
+    \begin{itemize}
+      \item A password (PIN, swipe pattern, \etc).
+      \item A cryptographic key (a longer password).
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Something you have]
+    \begin{itemize}
+      \item \Iac{PUF}.
+      \item A hardware token (smartcard, embedded cryptographic key).
+    \end{itemize}
+  \end{example}
+
+  \pause
+
+  \begin{remark}
+    \begin{itemize}
+      \item Where's the border between something you know and something you 
+        have?
+      \item Do you know or have a cryptographic key?
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Something you are, biometrics]
+    \begin{itemize}
+      \item Fingerprint
+      \item Iris
+      \item Gait (walking style)
+      \item Handwriting (style, pressure points, \etc)
+      \item Ear shape
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\subsection{Multi-factor authentication}
+
+\begin{frame}
+  \begin{definition}[Multi-factor authentication]
+    \begin{itemize}
+      \item Combine two or more methods of authentication: something you know, 
+        have or are.
+    \end{itemize}
+  \end{definition}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Single-factor authentication]
+    \begin{description}
+      \item[Identification] Username
+      \item[Authentication] Something you know, \ie a password
+    \end{description}
+  \end{example}
+
+  \pause{}
+
+  \begin{example}[Two-factor authentication]
+    \begin{description}
+      \item[Identification] Username
+      \item[Authentication] Something you know together with something you 
+        have, \eg password and mobile phone
+    \end{description}
+  \end{example}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[allowframebreaks]
+	\small
+  \printbibliography{}
+\end{frame}
+

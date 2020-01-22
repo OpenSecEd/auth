@@ -1,0 +1,199 @@
+\mode*
+
+% Since this a solution template for a generic talk, very little can
+% be said about how it should be structured. However, the talk length
+% of between 15min and 45min and the theme suggest that you stick to
+% the following rules:  
+
+% - Exactly two or three sections (other than the summary).
+% - At *most* three subsections per section.
+% - Talk about 30s to 2min per frame. So there should be between about
+%   15 and 30 frames, all told.
+
+
+\section[Bootstrapping]{Bootstrapping authentication}
+
+\subsection{What is bootstrapping?}
+
+\begin{frame}
+  \begin{block}{Bootstrapping: A chicken-and-egg problem}
+    \begin{itemize}
+      \item Alice is not registered in our authentication system.
+      \item We want to register her as a user in our system.
+
+        \pause{}
+
+      \item How do we know Alice is actually Alice?
+      \item Since she's not registered, we don't have anything to authenticate 
+        her.
+    \end{itemize}
+  \end{block}
+
+  \pause{}
+
+  \begin{exercise}
+    \begin{itemize}
+      \item Any quick workarounds that comes to mind?
+      \item When is this a problem and when is it not?
+    \end{itemize}
+  \end{exercise}
+\end{frame}
+
+\begin{frame}
+  \begin{solution}[We don't care who Alice is]
+    \begin{itemize}
+      \item We simply set up authentication when Alice creates the account.
+      \item Now we can authenticate whoever set up the account.
+    \end{itemize}
+  \end{solution}
+
+  \pause
+
+  \begin{remark}
+    \begin{itemize}
+      \item The attribute here is account ownership.
+    \end{itemize}
+  \end{remark}
+
+  \begin{example}
+    \begin{itemize}
+      \item This is the solution used by most web services.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{solution}[We care who Alice actually is]
+    \begin{itemize}
+      \item We can require ID checks etc.\ to set up the authentication 
+        mechanisms using a helpdesk.
+
+        \pause{}
+
+      \item If we have address etc., then we can send the credentials via mail 
+        (be it snailmail or email).
+
+    \end{itemize}
+  \end{solution}
+
+  \pause
+
+  \begin{remark}
+    \begin{itemize}
+      \item The attribute here is identity.
+      \item ID checks trust in the issuer.
+      \item Sending via mail trusts the mail system.
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\begin{frame}
+  \begin{exercise}
+    \begin{itemize}
+      \item How is Alice authenticated when she applies for an ID?
+    \end{itemize}
+  \end{exercise}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Signal, WhatsApp, \dots]
+    \begin{itemize}
+      \item Relies on ownership of (mobile) phone number.
+      \item Send a text message with a code.
+    \end{itemize}
+  \end{example}
+
+  \pause
+
+  \begin{remark}
+    \begin{itemize}
+      \item Assumes trustworthy phone infrastructure and operator.
+      \item Phone operator can impersonate.
+      \item Government can impersonate (forcing phone provider).
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\subsection{Problems and recovery}
+
+\begin{frame}
+  \begin{remark}
+    \begin{itemize}
+      \item How to recover from failure?
+    \end{itemize}
+  \end{remark}
+
+  \begin{example}
+    \begin{itemize}
+      \item You sign up for a Google account.
+      \item You forget your password \dots
+    \end{itemize}
+  \end{example}
+
+  \begin{example}
+    \begin{itemize}
+      \item You sign up for a Facebook account.
+      \item Someone guesses your password and takes over your account.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{itemize}
+    \item Sometimes this is a continuous process.
+
+    \item The same bootstrapping procedure can sometimes also be used for 
+      \emph{recovery from failure}.
+
+    \item Make sure the system can handle forgotten, lost or aged 
+      authentication means.
+  \end{itemize}
+\end{frame}
+
+\subsection{Give the problem to someone else}
+
+\begin{frame}
+  \begin{idea}
+    \begin{itemize}
+      \item We could let someone who has solved the problem already do the 
+        authentication for us.
+    \end{itemize}
+  \end{idea}
+
+  \pause
+
+  \begin{remark}
+    \begin{itemize}
+      \item This make it easier for the user.
+
+      \item This makes the provider a very attractive target.
+
+      \item We must trust them to do it properly \dots
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[We don't care who Alice is]
+    We can use Google, Facebook \etc.
+  \end{example}
+
+  \begin{example}[We care who Alice is]
+    We can use \eg BankID.
+  \end{example}
+
+  \begin{remark}
+    This third party must have done bootstrapping as rigorously as we would 
+    have.
+  \end{remark}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[allowframebreaks]
+	\small
+  \printbibliography
+\end{frame}
+

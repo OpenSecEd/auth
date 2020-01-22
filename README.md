@@ -16,6 +16,19 @@ maintainer is [Daniel Bosk][Maintainer].  The latest release can be found under
 [Releases]: https://github.com/OpenSecEd/appliedcrypto/releases
 
 
+Progression
+-------------------------------------------------------------------------------
+
+The suggested progression of the contents is as follows:
+
+ - `intro` (recording)
+ - `bootstrapping` (recording)
+ - `user-machine` (recording)
+ - `something-you-know` (recording)
+ - `something-you-have` (recording)
+ - `machine-user` (recording)
+
+
 File Structure and Building
 -------------------------------------------------------------------------------
 
@@ -24,25 +37,19 @@ submodules:
 ```shell
 $ git submodule update --recursive --init
 ```
-Then you can go into the directory of the desired document and run `make`.
-The source files are structured as follows:
-
-- `overview` contains slides to give the students a wide understanding of 
-  authentication and its possibilities.
-- `keyauth` contains slides for a lecture on key management and authentication, 
-  mainly focusing on Kerberos and X.509.
-- `passwd` is a learning module about passwords.  It contains assignments on 
-  that topic.
+Then you can go into the desired directory and run `make`. If you issue `make 
+all` in the root directory, you will recurse into each directory and compile.
 
 In each directory the files are structured as follows:
 
-- `<name>.tex` contains the main content.
+- `<name>.tex` is the main LaTeX file.
 - `aims.tex` is an itemized list of the intended learning outcomes, as such it 
   can be included in another document summarizing the list of intended learning 
   outcomes.
-- `abstract.tex` is an abstract of the lecture, assignment, or similar, and 
-  covers the required reading instructions, thus you can include these in 
-  a study guide containing all reading instructions for the course.
+- `abstract.tex` is an abstract containing a summary, intended learning 
+  outcomes and references to reading material.
+  It is suitable to include in a study guide containing all reading 
+  instructions for the course.
 - `<name>.bib` contains the bibliography entries, thus this file can be 
   included along with the reading instructions.
 

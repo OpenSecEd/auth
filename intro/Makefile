@@ -1,17 +1,21 @@
 .PHONY: all
-all: overview.pdf
+all: intro.pdf
 
-SRC+=		overview.tex abstract.tex overview.bib bibsp.sty
+SRC+=		intro.tex abstract.tex intro.bib bibsp.sty
 SRC+=		preamble.tex contents.tex
 
-overview.pdf: ${SRC}
+intro.pdf: ${SRC}
 
 authorization.png:
 	wget -O $@ http://imgs.xkcd.com/comics/authorization.png
 
 
-.PHONY: clean-depends
-clean-depends:
+.PHONY: clean
+clean:
+	${RM} intro.pdf
+
+.PHONY: distclean
+distclean:
 	${RM} authorization.png
 
 

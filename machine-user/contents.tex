@@ -1,0 +1,170 @@
+\mode*
+
+% Since this a solution template for a generic talk, very little can
+% be said about how it should be structured. However, the talk length
+% of between 15min and 45min and the theme suggest that you stick to
+% the following rules:  
+
+% - Exactly two or three sections (other than the summary).
+% - At *most* three subsections per section.
+% - Talk about 30s to 2min per frame. So there should be between about
+%   15 and 30 frames, all told.
+
+
+\section{Machine--user authentication}
+
+\subsection{What's the problem?}
+
+\begin{frame}
+  \begin{question}
+    \begin{itemize}
+      \item How can a user tell something legitimate from something 
+        illegitimate?
+    \end{itemize}
+  \end{question}
+
+  \begin{example}
+    \begin{itemize}
+      \item Payment terminal in the supermarket?
+      \item Email from someone?
+      \item Web page?
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{definition}[Spoofing/Masquerading]
+    \begin{itemize}
+      \item Attacker masquerades as authorized.
+      \item To a system: impersonates authorized user.
+      \item To a user: impersonates legitimate system/UI/part of UI.
+    \end{itemize}
+  \end{definition}
+\end{frame}
+
+\begin{frame}
+  \begin{definition}[Phishing]
+    \begin{itemize}
+      \item A masquerading attack trying to collect sensitive data.
+    \end{itemize}
+  \end{definition}
+
+  \begin{example}
+    \begin{itemize}
+      \item Email from IT department requesting the password.
+      \item See \url{https://phishingquiz.withgoogle.com/}.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\subsection{How to solve?}
+
+\begin{frame}
+  \begin{exercise}
+    How can we prevent spoofed interfaces?
+  \end{exercise}
+\end{frame}
+
+\begin{frame}
+  \begin{solution}[In general]
+    \begin{itemize}
+      \item Must have \emph{some} trusted interface.
+    \end{itemize}
+  \end{solution}
+
+  \begin{example}
+    \begin{itemize}
+      \item The computer and web browser are trusted.
+      \item Web pages are not.
+      \item But the browser tries to aid.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{example}
+    \begin{itemize}
+      \item The computer, browser and web pages are untrusted.
+      \item The mobile phone with BankID is trusted.
+    \end{itemize}
+  \end{example}
+
+  \pause
+
+  \begin{example}
+    \begin{itemize}
+      \item The payment terminal is untrusted.
+      \item The payment card is trusted.
+      \item How to communicate with the payment card? --- Through the untrusted 
+        terminal.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{example}
+    \begin{itemize}
+      \item Windows has a trusted path.
+      \item Uses the Ctrl+Alt+Del to bring up the authentication dialogue upon 
+        login.
+
+        \pause
+
+      \item How many know that?
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+%\begin{frame}
+%  \begin{remark}[Problem with social engineering]
+%    \begin{itemize}
+%      \item These are attacks on higher levels, e.g.\ an email or phone call.
+%      \item Difficult to check algorithmically.
+%    \end{itemize}
+%  \end{remark}
+%
+%  \begin{example}
+%    \begin{itemize}
+%      \item Phone call to helpdesk from a \enquote{user} in need.
+%      \item Stressful situation, willingness to help, \dots
+%    \end{itemize}
+%  \end{example}
+%
+%  \pause{}
+%  
+%  \begin{example}[Solution?]
+%    \begin{itemize}
+%      \item Authenticated phone calls.
+%      \item E.g.\ display caller ID clearly.
+%      \item \enquote{My phone is out of battery, I borrowed a student's}.
+%    \end{itemize}
+%  \end{example}
+%\end{frame}
+
+\begin{frame}
+  \begin{block}{Summary}
+    \begin{itemize}
+      \item Users must have trusted devices.
+      \item Users must not make mistakes setting these up.
+      \item We must do great usability to aid them.
+    \end{itemize}
+  \end{block}
+
+  \pause
+
+  \begin{remark}
+    \begin{itemize}
+      \item This is a very hard problem to solve.
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[allowframebreaks]
+	\small
+  \printbibliography
+\end{frame}
+

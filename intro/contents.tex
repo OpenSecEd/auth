@@ -1,0 +1,289 @@
+\mode*
+
+% Since this a solution template for a generic talk, very little can
+% be said about how it should be structured. However, the talk length
+% of between 15min and 45min and the theme suggest that you stick to
+% the following rules:  
+
+% - Exactly two or three sections (other than the summary).
+% - At *most* three subsections per section.
+% - Talk about 30s to 2min per frame. So there should be between about
+%   15 and 30 frames, all told.
+
+
+\section[Intro authentication]{Introduction to authentication}
+
+\subsection{Identification and authentication}
+
+\begin{frame}
+  \begin{definition}[Identifier]
+    \begin{itemize}
+      \item An identifier is a piece of data that uniquely identifies some 
+        entity.
+    \end{itemize}
+  \end{definition}
+
+  \begin{example}[Identifiers]
+    \begin{itemize}
+      \item An email address identifies a user uniquely in the email system.
+      \item A username identifies a user in some system.
+      \item A passport number uniquely identifies a passport issued by 
+        a country.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{definition}[Authentication]
+    \begin{itemize}
+      \item Some entity claims some attribute of some data.
+      \item \Eg identity: \enquote{identifier \(X\) identifies me}.
+      \item Authentication is about verification.
+      \item That entity must \emph{convince} us that its claim is true.
+    \end{itemize}
+  \end{definition}
+
+  \pause{}
+
+  \begin{exercise}[How can we authenticate \dots]
+    \begin{enumerate}
+      \item the claim of an email address?
+      \item the claim of a username in some system?
+      \item the claim of a passport number?
+      \item the claim of a national identity in some country?
+    \end{enumerate}
+  \end{exercise}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[User authentication]
+    \begin{description}
+      \item[Identification] First you enter your username to \emph{identify} 
+        yourself.
+
+      \item[Authentication] Then you enter your password to \emph{authenticate} 
+        that you are truly you.
+    \end{description}
+  \end{example}
+
+  \pause{}
+
+  \begin{exercise}
+    Why does this work?
+  \end{exercise}
+\end{frame}
+
+\begin{frame}
+  \begin{example}
+    \begin{itemize}
+      \item Identity is simply an attribute.
+      \item Age is another attribute.
+      \item \enquote{Authorized to read document X} is also an attribute.
+      \item \enquote{Is an administrator} is an attribute too.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\subsection{Authenticating}
+
+\begin{frame}
+  \begin{example}[Age limits]
+    \begin{itemize}
+      \item Bob wants to go see a film in cinema.
+      \item Bob looks very young so Alice who works there wants to have proof 
+        of his age.
+
+        \pause
+
+      \item Show physical ID; reveals name, exact date of birth, \dots
+    \end{itemize}
+  \end{example}
+
+  \pause
+
+  \begin{exercise}
+    \begin{itemize}
+      \item That's a bit overkill, right?
+      \item What does Alice actually need to know?
+      \item In what direction must we move to achieve that?
+    \end{itemize}
+  \end{exercise}
+\end{frame}
+
+\begin{frame}
+  \begin{block}{What Alice needs?}
+    She must be convinced that Bob is older than 15.
+  \end{block}
+
+  \pause
+
+  \begin{alertblock}{How can she learn that?}
+    \begin{enumerate}
+      \item She has known Bob since he was born, so she knows.
+
+        \pause
+
+      \item She can ask someone \emph{she trusts} who knows Bob is older than 
+        15.
+    \end{enumerate}
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}
+  \begin{alertblock}{But how can she do that?}
+    \begin{enumerate}
+      \item The trusted person who knows Bob is with Alice.
+
+        \pause
+
+      \item Alice can send a picture to the other person who verifies.
+        \begin{itemize}
+          \item This requires an \emph{authenticated} channel.
+        \end{itemize}
+
+        \pause
+
+      \item The trusted person made a certificate for Bob showing that he's 
+        older than 15.
+        \begin{itemize}
+          \item Alice must be able to \emph{verify} the certificate.
+          \item Bob must not be able to forge such a certificate.
+          \item Bob must bring this certificate with himself everywhere.
+        \end{itemize}
+
+    \end{enumerate}
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}
+  \begin{alertblock}{Alice interacts with the trusted person}
+    \begin{itemize}
+      \item Gaah, but Bob doesn't want the trusted person (his parents) to know 
+        he's at the cinema right now!
+      \item It's a small cinema so they'll know which film he sees if they 
+        learn when he's there.
+    \end{itemize}
+  \end{alertblock}
+
+  \pause
+
+  \begin{alertblock}{Alice reads and verifies the certificate}
+    \begin{itemize}
+      \item Phew, she accepted the note from his parents.
+      \item But now Alice learned all those embarrassing things in 
+        there.
+    \end{itemize}
+  \end{alertblock}
+\end{frame}
+
+\subsection{DIY or trust}
+
+\begin{frame}
+  \begin{itemize}
+    \item Some attributes we can verify ourselves (\ie DIY).
+    \item For other attributes we rely on someone else (\ie trust).
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Verify ourselves]
+    \begin{itemize}
+      \item I sign a note saying \enquote{Pay 10 SEK for this note}.
+      \item I give you this authentication token if I owe you 10 SEK.
+      \item I can verify the authenticity of the note when you claim the money.
+    \end{itemize}
+  \end{example}
+
+  \pause
+
+  \begin{example}[Trust someone else]
+    \begin{itemize}
+      \item I ask your age.
+      \item You show me your ID card.
+      \item I trust the card issuer and read your birthday.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{remark}
+    \begin{itemize}
+      \item Both methods use \enquote{authentication tokens}.
+      \item Security depends on forgeability of those.
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\subsection{Time of check, time of use}
+
+\begin{frame}
+  \begin{remark}
+    \begin{itemize}
+      \item Whenever we authenticate a user, we do this for a purpose.
+
+      \item When does this authentication take place in relation to when we make 
+        use of it?
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Bank office]
+    \begin{itemize}
+      \item Customer shows ID to clerk, clerk verifies account owner 
+        (authentication).
+      \item Clerk helps the customer.
+      \item Customer leaves.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Personal computers]
+    \begin{itemize}
+      \item User starts the computer in the morning.
+      \item User logs in (authentication step).
+      \item User goes for coffee.
+      \item User comes back.
+      \item User goes to lunch.
+      \item User comes back.
+      \item \dots
+      \item User turns the computer off.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{remark}
+    \begin{itemize}
+      \item The key difference is that the first (bank) has \enquote{continuous 
+          authentication}, the clerk notices if the customer changes.
+
+      \item The computer doesn't see the difference who's at the keyboard.
+      \item We need continuous authentication for the computer too.
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\begin{frame}
+  \begin{solution}
+    \begin{itemize}
+      \item We can approximate that with \emph{repeated authentication}.
+
+      \item We could also authenticate anew when we need to do something 
+        requiring more privileges, and if it has been a while since last time.
+
+      \item The computer could monitor the user's behaviour.
+    \end{itemize}
+  \end{solution}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[allowframebreaks]
+	\small
+  \printbibliography
+\end{frame}
+
